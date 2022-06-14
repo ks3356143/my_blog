@@ -143,7 +143,7 @@ class Comment(models.Model):
         verbose_name='评论文章'
     )
     user = models.ForeignKey(
-        to='Articles',
+        to='UserInfo',
         to_field='nid',
         on_delete=models.CASCADE,
         verbose_name='评论者'
@@ -245,7 +245,7 @@ class MoodComment(models.Model):
     nid = models.AutoField(primary_key=True)
     avatar = models.ForeignKey(
         to = 'Avatars',
-        to_fields= 'nid',
+        to_field= 'nid',
         on_delete= models.SET_NULL,
         null = True,
         verbose_name='心情发布头像'

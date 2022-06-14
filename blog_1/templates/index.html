@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>叫哥的个人博客</title>
+    <link rel="stylesheet" href="static/my/css/reset.css">
+    <link rel="stylesheet" href="static/my/css/index.css">
+    <script src="static/vue/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <link rel="stylesheet" :href="'static/my/css/theme/'+theme+'.css'">
+    <nav>
+        <div class="left">
+            <a href="#">首页</a>
+            <a href="#">新闻</a>
+            <a href="#">心情</a>
+            <a href="#">关于</a>
+        </div>
+        <div class="right">
+            <a href="#" @click="setTheme('dark')" v-if="pan_theme">黑色主题</a>
+            <a href="#" @click="setTheme('light')" v-else>白色主题</a>
+            <a href="#">登录</a>
+            <a href="#">注册</a>
+        </div>
+    </nav>
+    <header>
+        <div class="dynamic_shuff">
+            <img src="static/my/img/banner/banner1.jpg" alt="">
+        </div>
+        <div class="dynamic_shuff">
+            <img src="static/my/img/banner/banner2.jpg" alt="">
+        </div>
+    </header>
+    <main>
+        <h2>内容区域</h2>
+        <h2 v-text="theme"></h2>
+    </main>
+    <footer>
+        <h2>底部信息栏</h2>
+    </footer>
+</div>
+
+<script>
+    const vue = new Vue({
+        el: "#app",
+        delimiters: ["[[", "]]"],
+        data: {
+            theme: "light", //默认主题
+            pan_theme : true,
+        },
+        created(){
+            this.init_theme()
+            console.log(this.theme)
+        },
+        methods: {
+            //初始化主题
+            init_theme(){
+                let theme = localStorage.getItem('theme')
+                if(theme){
+                    this.theme = theme
+                }
+            },
+            //设置主题
+            setTheme(th_name){
+                this.theme = th_name
+                this.pan_theme = !this.pan_theme
+                //写入持久化存储
+                localStorage.setItem('theme',th_name)
+            }
+        }
+    })
+    //轮播图东西
+    let menu_img = document.querySelectorAll('.dynamic_shuff')
+    //定时器函数interval
+    let index = 0
+    let menu_length = menu_img.length
+    setInterval(()=>{
+        index++
+        if(index === menu_length){
+            index = 0
+        }
+        for (let i of menu_img) {
+        i.style.opacity = 0
+        }
+        menu_img[index].style.opacity = 1
+    },2000)
+
+</script>
+
+</body>
+</html>

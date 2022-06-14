@@ -1,0 +1,59 @@
+#app{
+  width:100%;
+  h2{
+    display: flex;
+  }
+  header{
+    width:100%;
+    height:700px;
+    position: relative;
+    >div{
+      position:absolute;
+      left:0;
+      top:0;
+      width: 100%;
+      height:100%;
+      overflow:hidden;
+      transition: all 1s;
+
+      img{
+        width: 100%;
+      }
+    }
+  }
+  nav{
+    width: calc(100% - 240px);
+    height: 60px;
+    background:var(--nav_bg);
+    display: flex;
+    align-items: center;
+    padding: 0 120px;
+    .left{
+      width: 60%;
+    }
+    .right{
+      width: 40%;
+      display: flex;
+      justify-content: right;
+    }
+    a{
+      color: var(--nav_color);
+      margin-right: 20px;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+  main{
+    width: 100%;
+    min-height: 600px;
+    background: var(--main_bg);
+    color: var(--main_color);
+  }
+  footer{
+     width: 100%;
+    min-height: 400px;
+    background: var(--footer_bg);
+    color: var(--footer_color);
+  }
+}
