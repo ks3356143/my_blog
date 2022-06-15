@@ -76,16 +76,16 @@
     //定时器函数interval
     let index = 0
     let menu_length = menu_img.length
-    setInterval(()=>{
+    setInterval(() => {
         index++
-        if(index === menu_length){
+        if (index === menu_length) {
             index = 0
         }
         for (let i of menu_img) {
-        i.style.opacity = 0
+            i.style.opacity = 0
         }
         menu_img[index].style.opacity = 1
-    },2000)
+    }, 5000)
 
 </script>
 
