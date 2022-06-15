@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load my_tag %}
 <head>
     <meta charset="UTF-8">
     <title>叫哥的个人博客</title>
@@ -25,20 +26,53 @@
             <a href="#">注册</a>
         </div>
     </nav>
-    <header>
-        <div class="dynamic_shuff">
-            <img src="static/my/img/banner/banner1.jpg" alt="">
-        </div>
-        <div class="dynamic_shuff">
-            <img src="static/my/img/banner/banner2.jpg" alt="">
-        </div>
-    </header>
+    {% banner 'index' %}
     <main>
         <h2>内容区域</h2>
         <h2 v-text="theme"></h2>
     </main>
     <footer>
-        <h2>底部信息栏</h2>
+        <div class="left">
+            <p class="thk">Thank For</p>
+            <p class="site_info">
+
+                <span><img src="static/my/img/footer/tencent.png" alt="">腾讯云服务器</span>
+                <span><img src="static/my/img/footer/tencent.png" alt="">腾讯云SSL证书</span>
+                <span><img src="static/my/img/footer/qiniu.png" alt="">七牛云存储</span>
+
+            </p>
+            <p class="version">
+                <span>version</span>
+                <span>0.0.0.1</span>
+            </p>
+            <p>建站日期:2022年6月20日</p>
+            <p class="beian">
+                <a href=""><img src="static/my/img/footer/badges.png" alt="">备案号链接</a>
+            </p>
+        </div>
+        <div class="right">
+            <div class="contact">
+                <div>
+                    <img class="svg" src="static/my/img/footer/qq_no.svg" alt="">
+                    <img class="qq" src="static/my/img/footer/qq_icon.svg" alt="">
+                </div>
+                <div>
+                    <img class="svg" src="static/my/img/footer/wechat_no.svg" alt="">
+                    <img class="wechat" src="static/my/img/footer/wechat_color.svg" alt="">
+                </div>
+                <div>
+                    <a href="" target="_blank">
+                        <img class="svg" src="static/my/img/footer/bilibili.svg" alt="">
+                    </a>
+                </div>
+                <div>
+                    <a href="" target="_blank">
+                        <img class="svg" src="static/my/img/footer/github.svg" alt="">
+                    </a>
+                </div>
+            </div>
+            <p>联系方式：31498729@qq.com</p>
+        </div>
     </footer>
 </div>
 
@@ -48,26 +82,26 @@
         delimiters: ["[[", "]]"],
         data: {
             theme: "light", //默认主题
-            pan_theme : true,
+            pan_theme: true,
         },
-        created(){
+        created() {
             this.init_theme()
             console.log(this.theme)
         },
         methods: {
             //初始化主题
-            init_theme(){
+            init_theme() {
                 let theme = localStorage.getItem('theme')
-                if(theme){
+                if (theme) {
                     this.theme = theme
                 }
             },
             //设置主题
-            setTheme(th_name){
+            setTheme(th_name) {
                 this.theme = th_name
                 this.pan_theme = !this.pan_theme
                 //写入持久化存储
-                localStorage.setItem('theme',th_name)
+                localStorage.setItem('theme', th_name)
             }
         }
     })
@@ -76,7 +110,10 @@
     //定时器函数interval
     let index = 0
     let menu_length = menu_img.length
-    setInterval(() => {
+    //每次创建页面销毁
+    let timer_interval = null
+    clearInterval(timer_interval)
+    timer_interval = setInterval(() => {
         index++
         if (index === menu_length) {
             index = 0
@@ -85,7 +122,7 @@
             i.style.opacity = 0
         }
         menu_img[index].style.opacity = 1
-    }, 5000)
+    }, 2000)
 
 </script>
 
