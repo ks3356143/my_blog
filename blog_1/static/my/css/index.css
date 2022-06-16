@@ -1,3 +1,24 @@
+.card .title {
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f5f5f5;
+  padding: 20px 20px 10px 20px;
+  background: white;
+}
+.card .title h2 {
+  font-size: 20px;
+}
+.card .title > div a {
+  font-size: 15px;
+}
+.card .body {
+  border-radius: 0 0 5px 5px;
+  padding: 10px 20px 20px 20px;
+  background: white;
+}
+
 #app {
   width: 100%;
 }
@@ -9,7 +30,6 @@
   height: 600px;
   position: relative;
 }
-
 #app header > .dynamic_shuff {
   position: absolute;
   left: 0;
@@ -18,12 +38,14 @@
   height: 100%;
   overflow: hidden;
   transition: all 1s;
+  opacity: 0;
 }
-
+#app header > .dynamic_shuff:first-child {
+  opacity: 1;
+}
 #app header > .dynamic_shuff img {
   width: 100%;
 }
-
 #app nav {
   width: calc(100% - 240px);
   height: 60px;
@@ -51,12 +73,171 @@
   margin-right: 0;
 }
 #app main {
-  width: 100%;
+  width: calc(100% - 240px);
+  padding: 20px 120px;
   min-height: 600px;
   background: var(--main_bg);
   color: var(--main_color);
+  display: flex;
+  justify-content: center;
 }
-
+#app .main {
+  width: 1200px;
+  min-height: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+#app .main > div > div {
+  margin-bottom: 20px;
+}
+#app .main .left {
+  width: 69%;
+}
+#app .main .left .all_article > .body {
+  background-color: transparent;
+  padding: 0;
+}
+#app .main .left .all_article > .body > ul {
+  width: 100%;
+}
+#app .main .left .all_article > .body > ul > li {
+  width: 100%;
+  display: flex;
+  background-color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+#app .main .left .all_article > .body > ul > li:first-child {
+  border-radius: 0 0 5px 5px;
+}
+#app .main .left .all_article > .body > ul > li:first-child .left {
+  padding: 10px 10px 20px 20px;
+}
+#app .main .left .all_article > .body > ul > li:first-child .right {
+  padding: 10px 20px 20px 10px;
+}
+#app .main .left .all_article > .body > ul > li .left {
+  width: 30%;
+  padding: 20px 10px 20px 20px;
+  box-sizing: border-box;
+}
+#app .main .left .all_article > .body > ul > li .left > div {
+  border-radius: 5px;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+}
+#app .main .left .all_article > .body > ul > li .left img {
+  width: 100%;
+  transition: all 0.5s;
+}
+#app .main .left .all_article > .body > ul > li .left img:hover {
+  transform: scale(1.1);
+}
+#app .main .left .all_article > .body > ul > li .right {
+  width: 70%;
+  padding: 20px 20px 20px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+#app .main .left .all_article > .body > ul > li .right .article_info {
+  font-size: 14px;
+  color: #555;
+}
+#app .main .left .all_article > .body > ul > li .right .article_info > span {
+  margin-right: 10px;
+}
+#app .main .left .all_article > .body > ul > li .right .article_info > span i {
+  margin-right: 5px;
+}
+#app .main .left .all_article > .body > ul > li .right .article_info > a {
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  color: white;
+  background-color: orange;
+  right: 20px;
+  bottom: 5px;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+#app .main .left .all_article > .body > ul > li .right > h2 {
+  font-size: 23px;
+}
+#app .main .left .all_article > .body > ul > li .right > p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+#app .main .right {
+  width: 30%;
+}
+#app .main .tags > .body {
+  position: relative;
+}
+#app .main .tags > .body ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+@keyframes move_box {
+  0% {
+    left: 0;
+    top: 0;
+  }
+  25% {
+    left: calc(100% - 20px);
+    top: 0;
+  }
+  50% {
+    left: calc(100% - 20px);
+    top: calc(100% - 20px);
+  }
+  75% {
+    left: 0;
+    top: calc(100% - 20px);
+  }
+  100% {
+    left: 0;
+    top: 0;
+  }
+}
+#app .main .tags > .body ul::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  content: "";
+  background-color: orange;
+  animation-name: move_box;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+#app .main .tags > .body ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(33.3333% - 2px);
+  height: 40px;
+}
+#app .main .tags > .body ul li:nth-child(2n+1) {
+  background-color: #f5f5f5;
+}
+#app .main .tags > .body ul li:nth-child(3n+1) {
+  border-right: 1px solid #f0eeee;
+}
+#app .main .tags > .body ul li:nth-child(3n+2) {
+  border-right: 1px solid #f0eeee;
+}
 #app footer {
   display: flex;
   width: 100%;
@@ -65,7 +246,6 @@
   color: var(--footer_color);
   font-size: 14px;
 }
-
 #app footer .left {
   width: 50%;
   display: flex;
@@ -73,7 +253,6 @@
   justify-content: center;
   align-items: center;
 }
-
 #app footer .right {
   width: 50%;
   display: flex;
@@ -81,32 +260,26 @@
   justify-content: center;
   align-items: center;
 }
-
 #app footer .thk {
   color: #26c6da;
   font-size: 20px;
 }
-
 #app footer .site_info {
   display: flex;
   align-items: center;
 }
-
 #app footer .site_info span {
   margin-right: 10px;
   display: flex;
   align-items: center;
 }
-
 #app footer .site_info img {
   width: 20px;
   margin-right: 5px;
 }
-
 #app footer .version {
   display: flex;
 }
-
 #app footer .version span {
   background: #333333;
   display: flex;
@@ -116,33 +289,27 @@
   color: white;
   width: 80px;
 }
-
 #app footer .version span:nth-child(1) {
   background: orange;
   border-radius: 5px 0 0 5px;
 }
-
 #app footer .version span:nth-child(2) {
   background: #26c6da;
   border-radius: 0 5px 5px 0;
 }
-
 #app footer .beian a {
   display: flex;
   align-items: center;
 }
-
 #app footer p {
   margin-bottom: 10px;
 }
-
 #app footer .contact {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 200px;
 }
-
 #app footer .contact > div {
   position: relative;
   width: 100px;
@@ -150,7 +317,6 @@
   justify-content: space-between;
   align-items: center;
 }
-
 #app footer .contact > div .qq {
   width: 80px;
   position: absolute;
@@ -159,7 +325,6 @@
   opacity: 0;
   transition: all 0.4s;
 }
-
 #app footer .contact > div .wechat {
   width: 80px;
   position: absolute;
@@ -168,7 +333,6 @@
   opacity: 0;
   transition: all 0.4s;
 }
-
 #app footer .contact .svg {
   width: 40px;
   height: 40px;
@@ -176,13 +340,11 @@
   position: relative;
   z-index: 1;
 }
-
 #app footer .contact .svg:hover ~ .qq {
   top: -76px;
   left: -20px;
   opacity: 1;
 }
-
 #app footer .contact .svg:hover ~ .wechat {
   top: -76px;
   left: -20px;

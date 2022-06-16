@@ -4,20 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>叫哥的个人博客</title>
-    <link rel="stylesheet" href="static/my/css/reset.css">
-    <link rel="stylesheet" href="static/my/css/index.css">
-    <script src="static/vue/vue.js"></script>
 
+    <link rel="stylesheet" href="/static/my/css/reset.css">
+    <link rel="stylesheet" href="/static/my/css/index.css">
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="/static/vue/vue.js"></script>
 </head>
 <body>
 <div id="app">
-    <link rel="stylesheet" :href="'static/my/css/theme/'+theme+'.css'">
+    <link rel="stylesheet" :href="'/static/my/css/theme/'+theme+'.css'">
     <nav>
         <div class="left">
-            <a href="#">首页</a>
-            <a href="#">新闻</a>
+            <a href="/">首页</a>
+            <a href="/news">新闻</a>
             <a href="#">心情</a>
+            <a href="#">回忆录</a>
             <a href="#">关于</a>
+            <a href="#">网站导航</a>
         </div>
         <div class="right">
             <a href="#" @click="setTheme('dark')" v-if="pan_theme">黑色主题</a>
@@ -28,17 +31,177 @@
     </nav>
     {% banner 'index' %}
     <main>
-        <h2>内容区域</h2>
-        <h2 v-text="theme"></h2>
+        {% block  main %}
+            <div class="main">
+                <div class="left">
+                    <div class="boutique_article card">
+                        <div class="title">
+                            <h2>精选文章</h2>
+                            <div>
+                                <a href="#">查看更多</a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            主要内容区域
+                        </div>
+                    </div>
+                    <div class="hotList card">
+                        <div class="title">
+                            <h2>今日热搜</h2>
+                            <div>
+                                <a href="#">查看更多</a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            主要内容区域
+                        </div>
+                    </div>
+                    <div class="all_article card">
+                        <div class="title">
+                            <h2>博客文章</h2>
+                        </div>
+                        <div class="body">
+                            <ul>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article1.jpg" alt="">
+
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2><a href="#">文章基本使用</a></h2>
+                                        <p>准备工作 在服务器上，需要准备一些部署必备的工作
+                                            已安装的忽略 ```Python git mysql nginx python3 ```
+                                            在本机上的准备工作 导出第三方准备工作 在服务器上
+                                            准备工作 在服务器上准备工作 在服务器上准备工作 在服务器上</p>
+                                        <div class="article_info">
+                                            <span>
+                                                <i class="fa fa-clock-o"></i>2022-06-12
+                                            </span>
+                                            <span>
+                                                <i class="fa fa-thumbs-up"></i>23
+                                            </span>
+                                            <span>
+                                                <i class="fa fa-eye"></i>5
+                                            </span>
+                                            <span>
+                                                <i class="fa fa-comments"></i>1
+                                            </span>
+                                            <span>
+                                                <i class="fa fa-star-half-o"></i>1
+                                            </span>
+                                            <a href="">查看详情</a>
+                                        </div>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article1.jpg" alt="">
+
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2><a href="#">文章基本使用</a></h2>
+                                        <p>准备工作 在服务器上，需要准备一些部署必备的工作
+                                            已安装的忽略 ```Python git mysql nginx python3 ```
+                                            在本机上的准备工作 导出第三方准备工作 在服务器上
+                                            准备工作 在服务器上准备工作 在服务器上准备工作 在服务器上</p>
+                                        <div class="article_info">
+                                            <span>
+                                                <i class="fa fa-clock-o"></i>2022-06-12
+                                            </span>
+                                            <span>
+                                                <i class="fa fa-thumbs-up"></i>23
+                                            </span>
+                                            <span>
+                                                <i class="fa fa-eye"></i>5
+                                            </span>
+                                            <span>
+                                                <i class="fa fa-comments"></i>1
+                                            </span>
+                                            <span>
+                                                <i class="fa fa-star-half-o"></i>1
+                                            </span>
+                                            <a href="">查看详情</a>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="advert card">
+                        <div class="title">
+                            <h2>独家广告</h2>
+                            <div>
+                                <a href="#">申请</a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            主要内容区域
+                        </div>
+                    </div>
+                    <div class="tags card">
+                        <div class="title">
+                            <h2>标签云</h2>
+                        </div>
+                        <div class="body">
+                            <ul>
+                                <li>Python</li>
+                                <li>Java</li>
+                                <li>Vue2</li>
+                                <li>Vue3</li>
+                                <li>Vite</li>
+                                <li>Django</li>
+                                <li>Html</li>
+                                <li>css</li>
+                                <li>SpringBoot</li>
+                                <li>ORM</li>
+                                <li>C</li>
+                                <li>Qt</li>
+                                <li>PyQt</li>
+                                <li>ElementUI</li>
+                                <li>React</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="site_info card">
+                        <div class="title">
+                            <h2>站点信息</h2>
+                        </div>
+                        <div class="body">
+                            主要内容区域
+                        </div>
+                    </div>
+                    <div class="links card">
+                        <div class="title">
+                            <h2>友情链接</h2>
+                            <div>
+                                <a href="#">申请</a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            主要内容区域
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
     </main>
     <footer>
         <div class="left">
             <p class="thk">Thank For</p>
             <p class="site_info">
 
-                <span><img src="static/my/img/footer/tencent.png" alt="">腾讯云服务器</span>
-                <span><img src="static/my/img/footer/tencent.png" alt="">腾讯云SSL证书</span>
-                <span><img src="static/my/img/footer/qiniu.png" alt="">七牛云存储</span>
+                <span><img src="/static/my/img/footer/tencent.png" alt="">腾讯云服务器</span>
+                <span><img src="/static/my/img/footer/tencent.png" alt="">腾讯云SSL证书</span>
+                <span><img src="/static/my/img/footer/qiniu.png" alt="">七牛云存储</span>
 
             </p>
             <p class="version">
@@ -47,27 +210,27 @@
             </p>
             <p>建站日期:2022年6月20日</p>
             <p class="beian">
-                <a href=""><img src="static/my/img/footer/badges.png" alt="">备案号链接</a>
+                <a href=""><img src="/static/my/img/footer/badges.png" alt="">备案号链接</a>
             </p>
         </div>
         <div class="right">
             <div class="contact">
                 <div>
-                    <img class="svg" src="static/my/img/footer/qq_no.svg" alt="">
-                    <img class="qq" src="static/my/img/footer/qq_icon.svg" alt="">
+                    <img class="svg" src="/static/my/img/footer/qq_no.svg" alt="">
+                    <img class="qq" src="/static/my/img/footer/qq_icon.svg" alt="">
                 </div>
                 <div>
-                    <img class="svg" src="static/my/img/footer/wechat_no.svg" alt="">
-                    <img class="wechat" src="static/my/img/footer/wechat_color.svg" alt="">
+                    <img class="svg" src="/static/my/img/footer/wechat_no.svg" alt="">
+                    <img class="wechat" src="/static/my/img/footer/wechat_color.svg" alt="">
                 </div>
                 <div>
                     <a href="" target="_blank">
-                        <img class="svg" src="static/my/img/footer/bilibili.svg" alt="">
+                        <img class="svg" src="/static/my/img/footer/bilibili.svg" alt="">
                     </a>
                 </div>
                 <div>
                     <a href="" target="_blank">
-                        <img class="svg" src="static/my/img/footer/github.svg" alt="">
+                        <img class="svg" src="/static/my/img/footer/github.svg" alt="">
                     </a>
                 </div>
             </div>
