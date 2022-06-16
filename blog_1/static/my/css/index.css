@@ -130,6 +130,7 @@
 #app .main .left .all_article > .body > ul > li .left img {
   width: 100%;
   transition: all 0.5s;
+  height: 120px;
 }
 #app .main .left .all_article > .body > ul > li .left img:hover {
   transform: scale(1.1);
