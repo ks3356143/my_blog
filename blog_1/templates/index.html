@@ -37,12 +37,160 @@
                     <div class="boutique_article card">
                         <div class="title">
                             <h2>精选文章</h2>
-                            <div>
-                                <a href="#">查看更多</a>
+                            <div class="switch_article_category">
+                                <span :isca="now_category === 'qianduan'" @click="switch_article_categor('qianduan')">前端</span>
+                                <span :isca="now_category === 'houduan'" @click="switch_article_categor('houduan')">后端</span>
                             </div>
                         </div>
                         <div class="body">
-                            主要内容区域
+                            <ul v-show="now_category === 'qianduan'" class="qianduan">
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>永不投降</h2>
+                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>永不投降</h2>
+                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>永不投降</h2>
+                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>永不投降</h2>
+                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>永不投降</h2>
+                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>永不投降</h2>
+                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul v-show="now_category === 'houduan'" class="hou">
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>后端显示</h2>
+                                        <p>后端的显示，在这里永远贯彻党的领导</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>后端显示</h2>
+                                        <p>后端的显示，在这里永远贯彻党的领导</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>后端显示</h2>
+                                        <p>后端的显示，在这里永远贯彻党的领导</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>后端显示</h2>
+                                        <p>后端的显示，在这里永远贯彻党的领导</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>后端显示</h2>
+                                        <p>后端的显示，在这里永远贯彻党的领导</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="left">
+                                        <div>
+                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h2>后端显示</h2>
+                                        <p>后端的显示，在这里永远贯彻党的领导</p>
+                                        <span>2天前</span>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="hotList card">
@@ -246,6 +394,7 @@
         data: {
             theme: "light", //默认主题
             pan_theme: true,
+            now_category:'qianduan' //当前精选文章位置
         },
         created() {
             this.init_theme()
@@ -265,6 +414,10 @@
                 this.pan_theme = !this.pan_theme
                 //写入持久化存储
                 localStorage.setItem('theme', th_name)
+            },
+            //精选文章切换分类
+            switch_article_categor(category){
+                this.now_category = category
             }
         }
     })
