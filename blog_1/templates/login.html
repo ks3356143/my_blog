@@ -23,14 +23,15 @@
 
 
             <div class="login_form">
+            {% csrf_token %}
                 {% block form %}
-                    <input type="text" placeholder="请输入用户名">
-                    <input type="text" placeholder="请输入密码">
+                    <input type="text" v-model="login_form.name" placeholder="请输入用户名">
+                    <input type="text" v-model="login_form.pwd" placeholder="请输入密码">
                     <div class="code">
-                        <input type="text" placeholder="输入验证码">
-                        <img src="/static/my/img/login/code.png" alt="">
+                        <input type="text" v-model="login_form.code" placeholder="输入验证码">
+                        <img src="/app01/utils/font/new_img.png" alt="验证码">
                     </div>
-                    <button>登录</button>
+                    <button @click="login">登录</button>
                 {% endblock %}
             </div>
             <div class="other_login">
@@ -48,5 +49,48 @@
         </div>
     </main>
 </div>
+
+<script src="/static/axios/axios.js"></script>
+<script src="/static/vue/vue.js"></script>
+<script src=""></script>
+<script>
+    //请求中间件
+    axios.interceptors.request.use(request=>{
+        if(request.method === 'post'){
+            let csrftoken = document.querySelector("input[name='csrfmiddlewaretoken']").value
+            request.headers['X-CSRFToken'] = csrftoken
+        }
+        return request
+    })
+    //axios响应中间件
+    axios.interceptors.response.use(response=>{
+        return response.data
+    })
+
+    const vue = new Vue({
+        el: '#app',
+        data: {
+            login_form: {
+                name: "",
+                pwd: "",
+                code: "",
+            }
+        },
+        methods : {
+            login(){
+                axios({
+                    method:"post",
+                    url:"/login/",
+                    data:this.login_form,
+                }).then(res=>{
+                    console.log(res)
+                })
+            }
+        }
+    })
+
+</script>
+
+
 </body>
 </html>

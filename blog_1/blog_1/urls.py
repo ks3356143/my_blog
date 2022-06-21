@@ -10,5 +10,6 @@ urlpatterns = [
     path('', views.index),
     path('news/', views.news),
     path('login/',views.login),
+    path('app01/utils/font/new_img.png',views.get_code),
     path('sign/',views.sign),
 ]
