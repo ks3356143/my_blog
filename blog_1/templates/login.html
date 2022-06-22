@@ -5,6 +5,8 @@
     {% block title %}
         <title>叫哥个人博客|用户登录</title>
     {% endblock %}
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/static/vue/lib-master/theme-chalk/index.css">
 
     <link rel="stylesheet" href="/static/my/css/reset.css">
     <link rel="stylesheet" href="/static/my/css/login.css">
@@ -23,12 +25,12 @@
 
 
             <div class="login_form">
-            {% csrf_token %}
+                {% csrf_token %}
                 {% block form %}
-                    <input type="text" v-model="login_form.name" placeholder="请输入用户名">
-                    <input type="text" v-model="login_form.pwd" placeholder="请输入密码">
+                    <input type="text" ref="login_form_name" v-model="login_form.name" placeholder="请输入用户名">
+                    <input type="text" ref="login_form_pwd" v-model="login_form.pwd" placeholder="请输入密码">
                     <div class="code">
-                        <input type="text" v-model="login_form.code" placeholder="输入验证码">
+                        <input type="text" ref="login_form_code" v-model="login_form.code" placeholder="输入验证码">
                         <img src="/app01/utils/font/new_img.png" alt="验证码">
                     </div>
                     <button @click="login">登录</button>
@@ -52,18 +54,20 @@
 
 <script src="/static/axios/axios.js"></script>
 <script src="/static/vue/vue.js"></script>
+<!-- 引入Element组件库 -->
+<script src="/static/vue/lib-master/index.js"></script>
 <script src=""></script>
 <script>
     //请求中间件
-    axios.interceptors.request.use(request=>{
-        if(request.method === 'post'){
+    axios.interceptors.request.use(request => {
+        if (request.method === 'post') {
             let csrftoken = document.querySelector("input[name='csrfmiddlewaretoken']").value
             request.headers['X-CSRFToken'] = csrftoken
         }
         return request
     })
     //axios响应中间件
-    axios.interceptors.response.use(response=>{
+    axios.interceptors.response.use(response => {
         return response.data
     })
 
@@ -76,14 +80,20 @@
                 code: "",
             }
         },
-        methods : {
-            login(){
+        methods: {
+            login() {
                 axios({
-                    method:"post",
-                    url:"/login/",
-                    data:this.login_form,
-                }).then(res=>{
-                    console.log(res)
+                    method: "post",
+                    url: "/login/",
+                    data: this.login_form,
+                }).then(res => {
+                    if (res.code === 404) {
+                        //输入错误信息
+                        this.$message.error(res.msg)
+                        this.$refs[`login_form_${res.self}`].focus()
+                        return
+                    }
+                    this.$message.success(res.msg)
                 })
             }
         }
