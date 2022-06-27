@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 {% load my_tag %}
 {% block css %}
+    <link rel="stylesheet" href="/static/editor.md/css/editormd.css">
     <link rel="stylesheet" href="/static/my/css/article.css">
 {% endblock %}
 
@@ -25,8 +26,8 @@
             </div>
 
         </div>
-        <div class="article_content">
-            md内容
+        <div class="article_content" id="text-editor">
+            <textarea style="display: none">{{ article.content }}</textarea>
         </div>
         <div class="comment_submit">
             <div class="title">
@@ -113,4 +114,21 @@
         </div>
 
     </div>
+{% endblock %}
+
+{% block js %}
+    <script src="/static/editor.md/lib/marked.min.js"></script>
+    <script src="/static/editor.md/lib/prettify.min.js"></script>
+    <script src="/static/JQuery/JQuery.js"></script>
+    <script src="/static/editor.md/editormd.min.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            let editor = editormd.markdownToHTML(
+                "text-editor",{
+                    width:"100%",
+                    height:"100%",
+                    path:"static/editor-md/lib/",
+                });
+        });
+    </script>
 {% endblock %}
