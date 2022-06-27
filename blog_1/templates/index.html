@@ -4,11 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title>叫哥的个人博客</title>
-
+    <!-- 引入ElementUI样式 -->
+    <link rel="stylesheet" href="/static/vue/lib-master/theme-chalk/index.css">
     <link rel="stylesheet" href="/static/my/css/reset.css">
-    <link rel="stylesheet" href="/static/my/css/index.css">
+    <link rel="stylesheet" href="/static/my/css/base.css">
+    {% block css %}
+        <link rel="stylesheet" href="/static/my/css/index.css">
+    {% endblock %}
+
     <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="/static/vue/vue.js"></script>
+    <!-- 引入Element组件库 -->
+    <script src="/static/vue/lib-master/index.js"></script>
 </head>
 <body>
 <div id="app">
@@ -25,11 +32,31 @@
         <div class="right">
             <a href="#" @click="setTheme('dark')" v-if="pan_theme">黑色主题</a>
             <a href="#" @click="setTheme('light')" v-else>白色主题</a>
-            <a href="/login">登录</a>
-            <a href="/sign">注册</a>
+
+            {% if request.user.username %}
+                <el-dropdown>
+                  <span class="el-dropdown-link">
+                    {{ request.user.username }}<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item><a href="">个人中心</a></el-dropdown-item>
+                        <el-dropdown-item><a href="">修改头像</a></el-dropdown-item>
+                        <el-dropdown-item><a href="">发布文章</a></el-dropdown-item>
+                        <el-dropdown-item><a href="">后台管理</a></el-dropdown-item>
+                        <el-dropdown-item divided><a href="/logout">注销退出</a></el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            {% else %}
+                <a href="/login">登录</a>
+                <a href="/sign">注册</a>
+            {% endif %}
+
+
         </div>
     </nav>
-    {% banner 'index' %}
+    {% block banner %}
+            {% banner 'index' %}
+    {% endblock %}
     <main>
         {% block  main %}
             <div class="main">
@@ -38,8 +65,10 @@
                         <div class="title">
                             <h2>精选文章</h2>
                             <div class="switch_article_category">
-                                <span :isca="now_category === 'qianduan'" @click="switch_article_categor('qianduan')">前端</span>
-                                <span :isca="now_category === 'houduan'" @click="switch_article_categor('houduan')">后端</span>
+                                <span :isca="now_category === 'qianduan'"
+                                      @click="switch_article_categor('qianduan')">前端</span>
+                                <span :isca="now_category === 'houduan'"
+                                      @click="switch_article_categor('houduan')">后端</span>
                             </div>
                         </div>
                         <div class="body">
@@ -394,7 +423,7 @@
         data: {
             theme: "light", //默认主题
             pan_theme: true,
-            now_category:'qianduan' //当前精选文章位置
+            now_category: 'qianduan' //当前精选文章位置
         },
         created() {
             this.init_theme()
@@ -416,7 +445,7 @@
                 localStorage.setItem('theme', th_name)
             },
             //精选文章切换分类
-            switch_article_categor(category){
+            switch_article_categor(category) {
                 this.now_category = category
             }
         }
@@ -429,6 +458,7 @@
     //每次创建页面销毁
     let timer_interval = null
     clearInterval(timer_interval)
+    menu_img[0].style.opacity = 1
     timer_interval = setInterval(() => {
         index++
         if (index === menu_length) {

@@ -50,6 +50,12 @@ main .top .login_form .code img {
   height: 44px;
   cursor: pointer;
   border-radius: 5px;
+  border: 1px solid #ff9800;
+  object-fit: contain;
+  transition: all 0.3s;
+}
+main .top .login_form .code img:hover {
+  transform: scale(1.1);
 }
 main .top .login_form .code > input {
   width: 55%;
@@ -76,6 +82,10 @@ main .top .login_form button {
   background-color: #ff9800;
   color: white;
   cursor: pointer;
+  transition: all 0.4s;
+}
+main .top .login_form button:hover {
+  background-color: #62ff00;
 }
 main .top .other_login {
   display: flex;

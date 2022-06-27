@@ -9,7 +9,7 @@ def random_color():
     data = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
     return data
 
-def random_code(size=(200,40),len_code=4,point_num=1000,line_num=15):
+def random_code(size=(200,48),len_code=4,point_num=1000,line_num=15):
     width,height = size
     img = Image.new('RGB',(width,height),color=(255,255,255)) #三个参数rgb模式、大小、颜色
 

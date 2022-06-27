@@ -5,7 +5,8 @@ import json
 class parse_json_post(MiddlewareMixin):
     #请求中间件
     def process_request(self,request):
-        if request.method == "POST":
+        if request.method == "POST" and request.content_type=='application/json':
+
             data = json.loads(request.body)
             request.data = data
 

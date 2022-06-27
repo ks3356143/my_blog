@@ -1,0 +1,116 @@
+{% extends 'index.html' %}
+{% load my_tag %}
+{% block css %}
+    <link rel="stylesheet" href="/static/my/css/article.css">
+{% endblock %}
+
+{% block banner %}
+    {% banner 'article' article %}
+{% endblock %}
+
+{% block main %}
+    <div class="article">
+        <div class="article_title">
+            <h2>{{ article.title }}</h2>
+            <p>
+                <span>发布时间:<i>{{ article.create_date|date:"Y-m-d"}}</i></span>
+                <span>作者:<i>{{ article.auther }}</i></span>
+                <span>来源:<i>{{ article.source }}</i></span>
+            </p>
+            <div>
+                <i class="fas fa-tags" aria-hidden="true"></i>
+                {% for tag in article.tag.all %}
+                    <i>{{ tag.title }}</i>
+                {% endfor %}
+            </div>
+
+        </div>
+        <div class="article_content">
+            md内容
+        </div>
+        <div class="comment_submit">
+            <div class="title">
+                你觉得文章如何
+            </div>
+            <div class="body">
+                <textarea name="" id="" cols="30" rows="10" placeholder="请写出你想说的话"></textarea>
+                <button class="submit_comment">
+                    发布
+                </button>
+            </div>
+            <div class="footer">
+                <p><span>46</span> 人参与,<span>3</span> 条评论</p>
+            </div>
+        </div>
+        <div class="comment_list">
+            <ul>
+                <li>
+                    <div class="left">
+                        <img src="/static/my/tou/tou1.jpg" alt="">
+                    </div>
+                    <div class="right">
+                        <h4>陈俊亦</h4>
+                        <div class="comment_content">
+                            <p>评论内容</p>
+                            <div>
+                                <img src="http://python.fengfengzhidao.com/pic/20220427072354.png" alt="">
+                                <img src="http://python.fengfengzhidao.com/pic/20220427072354.png" alt="">
+                                <img src="http://python.fengfengzhidao.com/pic/20220427072354.png" alt="">
+                            </div>
+                        </div>
+                        <div class="comment_info">
+                            <span>刚刚</span>
+                            <div>
+                                <span>点赞（0）</span>
+                                <span>回复（0）</span>
+                                <span class="delete">删除（0）</span>
+                            </div>
+                        </div>
+
+                        <div class="sub_comment_list">
+                            <div class="sub_comment_item">
+                                <div class="left">
+                                    <img src="http://www.fengfengzhidao.com/media/avatars/%E5%A4%B4%E5%83%8F_0006_23.jpg" alt="">
+                                </div>
+                                <div class="right">
+                                    <h4>张三 @ 陈俊亦</h4>
+                                    <div class="sub_comment_content">
+                                        你好
+                                    </div>
+                                    <div class="sub_comment_info">
+                                        <span>1秒前</span>
+                                        <div>
+                                            <span>点赞（1）</span>
+                                            <span>回复</span>
+                                            <span class="delete">删除</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sub_comment_item">
+                                <div class="left">
+                                    <img src="http://www.fengfengzhidao.com/media/avatars/%E5%A4%B4%E5%83%8F_0006_23.jpg" alt="">
+                                </div>
+                                <div class="right">
+                                    <h4>张三 @ 陈俊亦</h4>
+                                    <div class="sub_comment_content">
+                                        你好
+                                    </div>
+                                    <div class="sub_comment_info">
+                                        <span>1秒前</span>
+                                        <div>
+                                            <span>点赞（1）</span>
+                                            <span>回复</span>
+                                            <span class="delete">删除</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}

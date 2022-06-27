@@ -51,6 +51,12 @@ main {
           height: 44px;
           cursor: pointer;
           border-radius: 5px;
+          border: 1px solid #ff9800;
+          object-fit: contain;
+          transition: all 0.3s;
+          &:hover{
+            transform: scale(1.1);
+          }
         }
         >input{
           width: 55%;
@@ -82,6 +88,10 @@ main {
         background-color: #ff9800;
         color: white;
         cursor: pointer;
+        transition: all 0.4s;
+        &:hover{
+          background-color: #62ff00;
+        }
       }
     }
 

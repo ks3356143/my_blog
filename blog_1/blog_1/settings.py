@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app01',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +122,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+#用户自己上传的文件
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

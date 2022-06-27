@@ -11,13 +11,13 @@
 {% endblock %}
 
 {% block form %}
-    <input type="text" placeholder="请输入用户名"  class="sign_input">
-    <input type="text" placeholder="请输入密码"  class="sign_input">
-    <input type="text" placeholder="确认密码"  class="sign_input">
+    <input v-model="sign_form.name" ref="sign_form_name" type="text" placeholder="请输入用户名"  class="sign_input">
+    <input v-model="sign_form.pwd" ref="sign_form_pwd" type="password" placeholder="请输入密码"  class="sign_input">
+    <input v-model="sign_form.re_pwd" ref="sign_form_re_pwd" type="password" placeholder="确认密码"  class="sign_input">
     <div class="code">
-        <input type="text" placeholder="输入验证码" class="sign_input">
-        <img src="/static/my/img/login/code.png" alt="">
+        <input v-model="sign_form.code" ref="sign_form_code" type="text" placeholder="输入验证码" class="sign_input">
+        <img @click="get_random_code" src="/static/my/img/login/code.png" alt="">
     </div>
-    <button>注册</button>
+    <button @click="sign">注册</button>
 {% endblock %}
 

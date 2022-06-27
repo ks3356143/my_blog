@@ -22,16 +22,14 @@
                 {% endblock %}
 
             </div>
-
-
             <div class="login_form">
                 {% csrf_token %}
                 {% block form %}
                     <input type="text" ref="login_form_name" v-model="login_form.name" placeholder="请输入用户名">
-                    <input type="text" ref="login_form_pwd" v-model="login_form.pwd" placeholder="请输入密码">
+                    <input type="password" ref="login_form_pwd" v-model="login_form.pwd" placeholder="请输入密码">
                     <div class="code">
                         <input type="text" ref="login_form_code" v-model="login_form.code" placeholder="输入验证码">
-                        <img src="/app01/utils/font/new_img.png" alt="验证码">
+                        <img @click="get_random_code" src="/static/my/img/login/code.png" alt="验证码">
                     </div>
                     <button @click="login">登录</button>
                 {% endblock %}
@@ -78,13 +76,19 @@
                 name: "",
                 pwd: "",
                 code: "",
-            }
+            },
+            sign_form:{
+                name:"",
+                pwd:"",
+                re_pwd:"",
+                code:"",
+            },
         },
         methods: {
             login() {
                 axios({
                     method: "post",
-                    url: "/login/",
+                    url: "/api/login/",
                     data: this.login_form,
                 }).then(res => {
                     if (res.code === 404) {
@@ -94,8 +98,35 @@
                         return
                     }
                     this.$message.success(res.msg)
+                    setTimeout(()=>{
+                        location.href='/'
+                    },1000)
                 })
-            }
+            },
+            sign() {
+                axios({
+                    method: "post",
+                    url: "/api/sign/",
+                    data: this.sign_form,
+                }).then(res => {
+                    if (res.code === 404) {
+                        //输入错误信息
+                        this.$message.error(res.msg)
+                        this.$refs[`sign_form_${res.self}`].focus()
+                        return
+                    }
+                    this.$message.success(res.msg)
+                    setTimeout(()=>{
+                        location.href = '/'
+                    },1000)
+                })
+            },
+            //点击获取验证码
+            get_random_code(e){
+                let date = new Date().getTime();
+                console.log(date)
+                e.target.src = '/app01/utils/font?timestamp='+date
+            },
         }
     })
 
