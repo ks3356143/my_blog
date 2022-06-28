@@ -10,11 +10,27 @@
 {% endblock %}
 
 {% block main %}
+
     <div class="article">
+        <div class="slider_bar">
+            <div class="title">
+                悬浮目录
+            </div>
+            <div class="body">
+                <p class="H1">什么是反向解析什么是反向向解析什么是反向解析</p>
+                <p class="H1">名称空间</p>
+                <p class="H2">H2标题</p>
+                <p class="H3">H3标题</p>
+                <p class="H4">H4标题</p>
+                <p class="H5">H5标题</p>
+                <p class="H6">H6标题</p>
+
+            </div>
+        </div>
         <div class="article_title">
             <h2>{{ article.title }}</h2>
             <p>
-                <span>发布时间:<i>{{ article.create_date|date:"Y-m-d"}}</i></span>
+                <span>发布时间:<i>{{ article.create_date|date:"Y-m-d" }}</i></span>
                 <span>作者:<i>{{ article.auther }}</i></span>
                 <span>来源:<i>{{ article.source }}</i></span>
             </p>
@@ -71,7 +87,8 @@
                         <div class="sub_comment_list">
                             <div class="sub_comment_item">
                                 <div class="left">
-                                    <img src="http://www.fengfengzhidao.com/media/avatars/%E5%A4%B4%E5%83%8F_0006_23.jpg" alt="">
+                                    <img src="http://www.fengfengzhidao.com/media/avatars/%E5%A4%B4%E5%83%8F_0006_23.jpg"
+                                         alt="">
                                 </div>
                                 <div class="right">
                                     <h4>张三 @ 陈俊亦</h4>
@@ -90,7 +107,8 @@
                             </div>
                             <div class="sub_comment_item">
                                 <div class="left">
-                                    <img src="http://www.fengfengzhidao.com/media/avatars/%E5%A4%B4%E5%83%8F_0006_23.jpg" alt="">
+                                    <img src="http://www.fengfengzhidao.com/media/avatars/%E5%A4%B4%E5%83%8F_0006_23.jpg"
+                                         alt="">
                                 </div>
                                 <div class="right">
                                     <h4>张三 @ 陈俊亦</h4>
@@ -122,12 +140,12 @@
     <script src="/static/JQuery/JQuery.js"></script>
     <script src="/static/editor.md/editormd.min.js"></script>
     <script type="text/javascript">
-        $(function (){
+        $(function () {
             let editor = editormd.markdownToHTML(
-                "text-editor",{
-                    width:"100%",
-                    height:"100%",
-                    path:"static/editor-md/lib/",
+                "text-editor", {
+                    width: "100%",
+                    height: "100%",
+                    path: "static/editor-md/lib/",
                 });
         });
     </script>

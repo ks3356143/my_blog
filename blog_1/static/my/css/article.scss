@@ -1,5 +1,7 @@
 .article {
-  width: 1200px;
+  width: 70%;
+  position: relative;
+
 
   .article_title {
     display: flex;
@@ -41,7 +43,7 @@
 
   .article_content {
     margin-top: 2px;
-    width: 100%;
+    width: calc(100% - 40px);
     min-height: 200px;
     background-color: white;
   }
@@ -138,6 +140,7 @@
             width: 50px;
             border-radius: 5px;
             transition: all 0.3s;
+
             &:hover {
               transform: scale(1.2);
             }
@@ -231,12 +234,70 @@
               }
             }
 
-            .sub_comment_item{
-              margin-top:10px;
+            .sub_comment_item {
+              margin-top: 10px;
             }
           }
         }
       }
     }
   }
+
+  .slider_bar {
+    width: calc(250px - 40px);
+    border-radius: 5px;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: -264px;
+    padding: 20px;
+
+    .title{
+      font-size:18px;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+    .body{
+      font-size:16px;
+      p{
+        transition: all 0.3s;
+        cursor: pointer;
+        height: 30px;
+        line-height: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover{
+          color: white;
+          background-color: #e4ab0d;
+        }
+
+        &.H1{
+
+        }
+        &.H2{
+          padding-left: 10px;
+        }
+        &.H3{
+          padding-left: 15px;
+        }
+        &.H4{
+          padding-left: 20px;
+        }
+        &.H5{
+          font-size: 14px;
+          padding-left: 25px;
+        }
+        &.H6{
+          font-size: 12px;
+          padding-left: 30px;
+        }
+
+      }
+    }
+
+  }
 }
+
+
