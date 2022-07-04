@@ -42,3 +42,10 @@ def sign(request):
     return render(request, 'sign.html')
 
 # 文章详情页面跳转
+
+#个人中心
+def backend(request):
+    if not request.user.username:
+        #没有登录
+        return redirect('/')
+    return render(request,'backend/backend.html')

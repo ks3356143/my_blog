@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台界面</title>
+    <!-- 引入ElementUI样式 -->
+    <link rel="stylesheet" href="/static/vue/lib-master/theme-chalk/index.css">
+    <link rel="stylesheet" href="/static/my/css/reset.css">
+    <link rel="stylesheet" href="/static/my/css/backend/backend.css">
+    <!-- 引入Element组件库 -->
+    <script src="/static/vue/vue.js"></script>
+    <script src="/static/vue/lib-master/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <aside>
+        <div class="logo">
+            <img src="/static/my/img/logo/logo.jpg" alt="">
+        </div>
+        <ul>
+            <li>
+                <a href="/">首页</a>
+            </li>
+            <li>
+                <a href="/backend">个人中心</a>
+            </li>
+            <li>
+                <a href="">修改头像</a>
+            </li>
+            <li>
+                <a href="">修改密码</a>
+            </li>
+        </ul>
+    </aside>
+    <main>
+        <div class="user_info">
+            <div class="left">
+                <img src="/static/my/img/logo/logo.jpg" alt="">
+            </div>
+            <div class="right">
+                <div class="item">
+                    <span>
+                        <b>用户名：</b>陈俊亦
+                    </span>
+                </div>
+                <div class="item">
+                    <span>
+                        <b>注册时间：</b>2022-06-30
+                    </span>
+                </div>
+                <div class="item">
+                    <span>
+                        <b>上次登录时间：</b>2022-06-30
+                    </span>
+                </div>
+                <div class="item">
+                    <span>
+                        <b>用户积分：</b>2015
+                    </span>
+                </div>
+                <div class="item">
+                    <span>
+                        <b>邮箱地址：</b>314298729@qq.com
+                    </span>
+                </div>
+                <div class="item">
+                    <span>
+                        <b>手机号：</b>18782947123
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <div class="action">
+            <div class="item"><el-button type="primary">完善信息</el-button></div>
+            <div class="item"><el-button type="success">修改头像</el-button></div>
+            <div class="item"><el-button type="warning">修改密码</el-button></div>
+            <div class="item"><el-button type="danger">注销退出</el-button></div>
+
+        </div>
+
+        <div class="collection_article_all">
+            <p>我收藏的文章</p>
+            <div class="article_list">
+                <div class="item">
+                    <div class="left">
+                        <img src="/static/my/img/logo/the1.jpg" alt="">
+                    </div>
+                    <div class="right">
+                        <h4>路由分发</h4>
+                        <p>此文章针对python的django项目，使用uwsgi进行部署,此文章针对python的django项目，使用uwsgi进行部署</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="left">
+                        <img src="/static/my/img/logo/the1.jpg" alt="">
+                    </div>
+                    <div class="right">
+                        <h4>路由分发</h4>
+                        <p>此文章针对python的django项目，使用uwsgi进行部署</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="left">
+                        <img src="/static/my/img/logo/the1.jpg" alt="">
+                    </div>
+                    <div class="right">
+                        <h4>路由分发</h4>
+                        <p>此文章针对python的django项目，使用uwsgi进行部署</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="left">
+                        <img src="/static/my/img/logo/the1.jpg" alt="">
+                    </div>
+                    <div class="right">
+                        <h4>路由分发</h4>
+                        <p>此文章针对python的django项目，使用uwsgi进行部署</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    const vue = new Vue({
+        el: "#app",
+
+    })
+</script>
+
+</body>
+</html>
