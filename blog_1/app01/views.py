@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from app01.utils.random_code import random_code
 # 引入auth表接口
 from django.contrib import auth
-from app01.models import Articles
+from app01.models import Articles,Tags,Cover
 
 
 # 登录页面
@@ -48,4 +48,18 @@ def backend(request):
     if not request.user.username:
         #没有登录
         return redirect('/')
-    return render(request,'backend/backend.html')
+    return render(request,'backend/backend.html',{'request':request})
+
+#个人中心-添加文章
+def add_article(request):
+    tag_list = Tags.objects.all()
+    cover_list = Cover.objects.all()
+    return render(request,'backend/add_article.html',locals())
+
+#后台修改头像
+def edit_avatar(request):
+    return render(request,'backend/edit_avatar.html',locals())
+#后台修改密码
+def reset_password(request):
+    return render(request,'backend/reset_password.html',locals())
+#后台完善信息

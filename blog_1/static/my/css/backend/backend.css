@@ -27,9 +27,13 @@ aside > ul > li {
   display: flex;
   align-items: center;
   transition: all 0.3s;
+  cursor: pointer;
 }
 aside > ul > li a {
   color: white;
+  line-height: 40px;
+  width: 100%;
+  text-align: center;
 }
 aside > ul > li:hover {
   background-color: rgba(0, 0, 0, 0.2);

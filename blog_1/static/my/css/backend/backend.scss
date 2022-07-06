@@ -29,9 +29,13 @@ aside {
       display: flex;
       align-items: center;
       transition: all 0.3s;
+      cursor: pointer;
 
       a {
         color: white;
+        line-height:40px;
+        width: 100%;
+        text-align: center;
       }
 
       &:hover {

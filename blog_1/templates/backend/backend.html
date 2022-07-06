@@ -6,8 +6,12 @@
     <!-- 引入ElementUI样式 -->
     <link rel="stylesheet" href="/static/vue/lib-master/theme-chalk/index.css">
     <link rel="stylesheet" href="/static/my/css/reset.css">
+    {% block css %}
+
+    {% endblock %}
     <link rel="stylesheet" href="/static/my/css/backend/backend.css">
     <!-- 引入Element组件库 -->
+    <script src="/static/axios/axios.js"></script>
     <script src="/static/vue/vue.js"></script>
     <script src="/static/vue/lib-master/index.js"></script>
 </head>
@@ -18,118 +22,210 @@
             <img src="/static/my/img/logo/logo.jpg" alt="">
         </div>
         <ul>
-            <li>
-                <a href="/">首页</a>
-            </li>
-            <li>
-                <a href="/backend">个人中心</a>
-            </li>
-            <li>
-                <a href="">修改头像</a>
-            </li>
-            <li>
-                <a href="">修改密码</a>
-            </li>
+            <li><a href="/">首页</a></li>
+            <li><a href="/backend/">个人中心</a></li>
+            <li><a href="/backend/edit_avatar/">修改头像</a></li>
+            <li><a href="/backend/reset_password/">修改密码</a></li>
+            {% if request.user.is_superuser %}
+                <li><a href="/backend/add_article/">添加文章</a></li>
+            {% endif %}
+            <li><a href="/logout/">退出登录</a></li>
         </ul>
     </aside>
     <main>
-        <div class="user_info">
-            <div class="left">
-                <img src="/static/my/img/logo/logo.jpg" alt="">
+        {% csrf_token %}
+        {% block main %}
+            <div class="user_info">
+                <div class="left">
+                    <img src="/static/my/img/logo/logo.jpg" alt="">
+                </div>
+                <div class="right">
+                    <div class="item">
+                        <span>
+                            <b>用户名：</b>陈俊亦
+                        </span>
+                    </div>
+                    <div class="item">
+                        <span>
+                            <b>注册时间：</b>2022-06-30
+                        </span>
+                    </div>
+                    <div class="item">
+                        <span>
+                            <b>上次登录时间：</b>2022-06-30
+                        </span>
+                    </div>
+                    <div class="item">
+                        <span>
+                            <b>用户积分：</b>2015
+                        </span>
+                    </div>
+                    <div class="item">
+                        <span>
+                            <b>邮箱地址：</b>314298729@qq.com
+                        </span>
+                    </div>
+                    <div class="item">
+                        <span>
+                            <b>手机号：</b>18782947123
+                        </span>
+                    </div>
+
+                </div>
             </div>
-            <div class="right">
+            <div class="action">
                 <div class="item">
-                    <span>
-                        <b>用户名：</b>陈俊亦
-                    </span>
+                    <el-button type="primary">完善信息</el-button>
                 </div>
                 <div class="item">
-                    <span>
-                        <b>注册时间：</b>2022-06-30
-                    </span>
+                    <el-button type="success">修改头像</el-button>
                 </div>
                 <div class="item">
-                    <span>
-                        <b>上次登录时间：</b>2022-06-30
-                    </span>
+                    <el-button type="warning">修改密码</el-button>
                 </div>
                 <div class="item">
-                    <span>
-                        <b>用户积分：</b>2015
-                    </span>
-                </div>
-                <div class="item">
-                    <span>
-                        <b>邮箱地址：</b>314298729@qq.com
-                    </span>
-                </div>
-                <div class="item">
-                    <span>
-                        <b>手机号：</b>18782947123
-                    </span>
+                    <el-button type="danger">注销退出</el-button>
                 </div>
 
             </div>
-        </div>
-        <div class="action">
-            <div class="item"><el-button type="primary">完善信息</el-button></div>
-            <div class="item"><el-button type="success">修改头像</el-button></div>
-            <div class="item"><el-button type="warning">修改密码</el-button></div>
-            <div class="item"><el-button type="danger">注销退出</el-button></div>
+            {% block content %}
+                <div class="collection_article_all">
+                    <p>我收藏的文章</p>
+                    <div class="article_list">
+                        <div class="item">
+                            <div class="left">
+                                <img src="/static/my/img/logo/the1.jpg" alt="">
+                            </div>
+                            <div class="right">
+                                <h4>路由分发</h4>
+                                <p>此文章针对python的django项目，使用uwsgi进行部署,此文章针对python的django项目，使用uwsgi进行部署</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="left">
+                                <img src="/static/my/img/logo/the1.jpg" alt="">
+                            </div>
+                            <div class="right">
+                                <h4>路由分发</h4>
+                                <p>此文章针对python的django项目，使用uwsgi进行部署</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="left">
+                                <img src="/static/my/img/logo/the1.jpg" alt="">
+                            </div>
+                            <div class="right">
+                                <h4>路由分发</h4>
+                                <p>此文章针对python的django项目，使用uwsgi进行部署</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="left">
+                                <img src="/static/my/img/logo/the1.jpg" alt="">
+                            </div>
+                            <div class="right">
+                                <h4>路由分发</h4>
+                                <p>此文章针对python的django项目，使用uwsgi进行部署</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
 
-        </div>
+        {% endblock %}
 
-        <div class="collection_article_all">
-            <p>我收藏的文章</p>
-            <div class="article_list">
-                <div class="item">
-                    <div class="left">
-                        <img src="/static/my/img/logo/the1.jpg" alt="">
-                    </div>
-                    <div class="right">
-                        <h4>路由分发</h4>
-                        <p>此文章针对python的django项目，使用uwsgi进行部署,此文章针对python的django项目，使用uwsgi进行部署</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="left">
-                        <img src="/static/my/img/logo/the1.jpg" alt="">
-                    </div>
-                    <div class="right">
-                        <h4>路由分发</h4>
-                        <p>此文章针对python的django项目，使用uwsgi进行部署</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="left">
-                        <img src="/static/my/img/logo/the1.jpg" alt="">
-                    </div>
-                    <div class="right">
-                        <h4>路由分发</h4>
-                        <p>此文章针对python的django项目，使用uwsgi进行部署</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="left">
-                        <img src="/static/my/img/logo/the1.jpg" alt="">
-                    </div>
-                    <div class="right">
-                        <h4>路由分发</h4>
-                        <p>此文章针对python的django项目，使用uwsgi进行部署</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </main>
 </div>
 
 <script>
+    //请求中间件
+    axios.interceptors.request.use(request => {
+        if (request.method === 'post') {
+            let csrftoken = document.querySelector("input[name='csrfmiddlewaretoken']").value
+            request.headers['X-CSRFToken'] = csrftoken
+        }
+        return request
+    })
+    //axios响应中间件
+    axios.interceptors.response.use(response => {
+        return response.data
+    })
+
     const vue = new Vue({
         el: "#app",
+        data: {
+            //是否展开添加文章的侧边栏
+            add_drawer: false,
+            add_article_activeNames: ['1'],
+            //侧边栏文章抽屉数据
+            add_article_title: "",
+            //选择文章分类数据
+            category_value: "",
+            category_options: [
+                {
+                    value: "0",
+                    label: "前端",
+                },
+                {
+                    value: "1",
+                    label: "后端",
+                },
+                {
+                    value: "2",
+                    label: "项目相关",
+                },
+            ],
+            //选择标签
+            tag_value: [],
+            //是否上推荐
+            recommend: true,
+            //是否加密
+            pwdactive: false,
+            //加密面数据绑定
+            pwdinput: "",
+            //文章封面选择数据绑定
+            img_value: "",
+            //图片显示地址
+            tupianpath: "/media/article_img/311_ylJbtwC.jpg",
+            //文章简介
+            abstract: "",
+        },
+        methods: {
+            add_handleClose(done) {
+                done();
+            },
+            //添加文章的函数
+            add_article() {
+                let data = {
+                    title: this.add_article_title,
+                    cover_id: this.img_value,
+                    pwd: this.pwdinput,
+                    recommend: this.recommend,
+                    tags: this.tag_value,
+                    category_id: this.category_value,
+                    abstract: this.abstract,
+                    content: editor.querySelector('.editormd-markdown-textarea').value
+                }
+                axios({
+                    method: "post",
+                    url: "/api/article/",
+                    data: data,
+                }).then(res => {
+                    console.log(res)
+                })
+            },
+            //当选择器改变时候，更新图片展示
+            select_cover() {
+                this.tupianpath = this.img_value
+            }
+        }
 
     })
 </script>
+{% block js %}
+
+{% endblock %}
 
 </body>
 </html>

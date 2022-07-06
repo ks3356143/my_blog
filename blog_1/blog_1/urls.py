@@ -23,4 +23,12 @@ urlpatterns = [
 
     #个人中心
     path('backend/',views.backend),
+    #个人中心-添加文章
+    path('backend/add_article/',views.add_article),
+    #后台修改头像
+    path('backend/edit_avatar/',views.edit_avatar),
+    #后台修改密码
+    path('backend/reset_password/',views.reset_password),
+    #后台完善信息
+
 ]
