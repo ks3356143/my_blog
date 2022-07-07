@@ -3,6 +3,7 @@
 {% block css %}
     <link rel="stylesheet" href="/static/editor.md/css/editormd.css">
     <link rel="stylesheet" href="/static/my/css/article.css">
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block banner %}
@@ -35,7 +36,7 @@
                 <span>来源:<i>{{ article.source }}</i></span>
             </p>
             <div>
-                <i class="fas fa-tags" aria-hidden="true"></i>
+                <i class="fa fa-tags" aria-hidden="true"></i>
                 {% for tag in article.tag.all %}
                     <i>{{ tag.title }}</i>
                 {% endfor %}

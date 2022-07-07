@@ -7,7 +7,7 @@
 
 {% block main %}
     <el-button class="actions" @click="add_drawer = true" type="primary">
-        点我打开
+        文章设置
     </el-button>
 
     <el-drawer
@@ -64,14 +64,14 @@
                 </el-collapse-item>
                 <el-collapse-item class="article_cover" title="文章封面" name="4">
                     <div class="left">
-                        <img :src="tupianpath" alt="">
+                        <img :src="tupian_now" alt="">
                     </div>
                     <div class="right">
-                        <el-select @change="select_cover" v-model="img_value" placeholder="请选择文章封面">
+                        <el-select ref="operatePath" @change="select_cover" v-model="img_value" placeholder="请选择文章封面">
                             {% for cover in cover_list %}
                                 <el-option
                                         label={{ cover.url.url }}
-                                                value={{ cover.url.url }}>
+                                                value={{ cover.nid }}>
                                 </el-option>
                             {% endfor %}
 

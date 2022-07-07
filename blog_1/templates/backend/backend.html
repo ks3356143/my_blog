@@ -161,18 +161,18 @@
             //侧边栏文章抽屉数据
             add_article_title: "",
             //选择文章分类数据
-            category_value: "",
+            category_value: 2,
             category_options: [
                 {
-                    value: "0",
+                    value: 0,
                     label: "前端",
                 },
                 {
-                    value: "1",
+                    value: 1,
                     label: "后端",
                 },
                 {
-                    value: "2",
+                    value: 2,
                     label: "项目相关",
                 },
             ],
@@ -186,8 +186,7 @@
             pwdinput: "",
             //文章封面选择数据绑定
             img_value: "",
-            //图片显示地址
-            tupianpath: "/media/article_img/311_ylJbtwC.jpg",
+            tupian_now: "/media/article_img/311.jpg",
             //文章简介
             abstract: "",
         },
@@ -203,7 +202,7 @@
                     pwd: this.pwdinput,
                     recommend: this.recommend,
                     tags: this.tag_value,
-                    category_id: this.category_value,
+                    category: this.category_value,
                     abstract: this.abstract,
                     content: editor.querySelector('.editormd-markdown-textarea').value
                 }
@@ -212,12 +211,26 @@
                     url: "/api/article/",
                     data: data,
                 }).then(res => {
-                    console.log(res)
+                    if(res.code !== 200){
+                        this.$message.error(res.msg)
+                        return
+                    }
+                    this.$message.success(res.msg)
+                    setTimeout(()=>{
+                        data = res.data
+                        location.href = `/article/${data}/`
+                    },200)
                 })
             },
             //当选择器改变时候，更新图片展示
-            select_cover() {
-                this.tupianpath = this.img_value
+            select_cover(value) {
+                //vue获取ref属性中的el-select属性值
+                setTimeout(() => {
+                    let img_path = this.$refs.operatePath.selectedLabel
+                    console.log(img_path)
+                    this.tupian_now = img_path
+                }, 100)
+
             }
         }
 
