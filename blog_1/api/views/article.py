@@ -69,6 +69,7 @@ class ArticleView(View):
         #表单校验通过
         if not form.is_valid():
             res['self'], res['msg'] = clean_form(form)
+            res['code'] = 401
             return JsonResponse(res)
 
         #表单通过-->**表示解构
