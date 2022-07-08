@@ -127,6 +127,8 @@ class Articles(models.Model):
     auther = models.CharField(max_length=16, verbose_name='作者', null=True, blank=True)
     source = models.CharField(max_length=32, verbose_name='来源', null=True, blank=True)
 
+    link = models.URLField(verbose_name='文章链接',null=True,blank=True)
+
     def __str__(self):
         return self.title
 

@@ -63,3 +63,14 @@ def edit_avatar(request):
 def reset_password(request):
     return render(request,'backend/reset_password.html',locals())
 #后台完善信息
+
+
+#后台编辑文章
+def edit_article(request,nid):
+    article_obj = Articles.objects.get(nid=nid)
+    tag_list = Tags.objects.all()
+    cover_list = Cover.objects.all()
+
+    tags = [str(tag.nid) for tag in article_obj.tag.all()]
+
+    return render(request,'backend/edit_article.html',locals())

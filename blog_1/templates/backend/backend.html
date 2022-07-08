@@ -138,6 +138,10 @@
     </main>
 </div>
 
+
+{% block js %}
+
+{% endblock %}
 <script>
     //请求中间件
     axios.interceptors.request.use(request => {
@@ -189,6 +193,31 @@
             tupian_now: "/media/article_img/311.jpg",
             //文章简介
             abstract: "",
+
+            /////////编辑文章页面数据
+
+        },
+        created() {
+            let box = document.getElementById('edit_info')
+            this.add_article_title = box.getAttribute('data_title')
+            this.abstract = box.getAttribute("data_abstract")
+
+            let category_id = box.getAttribute("data_category")
+            if(category_id !=="None"){
+                this.category_value = Number(category_id)
+            }
+
+            this.tag_value = eval(box.getAttribute('data_tags'))
+
+            this.img_value = box.getAttribute('data_cover_id')
+            this.tupian_now = box.getAttribute('data_cover_url')
+
+
+            let password = box.getAttribute("data_pwd")
+            if(password !== 'None'){
+                this.pwdinput = password
+                this.pwdactive = true
+            }
         },
         methods: {
             add_handleClose(done) {
@@ -211,15 +240,15 @@
                     url: "/api/article/",
                     data: data,
                 }).then(res => {
-                    if(res.code !== 200){
+                    if (res.code !== 200) {
                         this.$message.error(res.msg)
                         return
                     }
                     this.$message.success(res.msg)
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         data = res.data
                         location.href = `/article/${data}/`
-                    },200)
+                    }, 200)
                 })
             },
             //当选择器改变时候，更新图片展示
@@ -227,7 +256,6 @@
                 //vue获取ref属性中的el-select属性值
                 setTimeout(() => {
                     let img_path = this.$refs.operatePath.selectedLabel
-                    console.log(img_path)
                     this.tupian_now = img_path
                 }, 100)
 
@@ -236,9 +264,6 @@
 
     })
 </script>
-{% block js %}
-
-{% endblock %}
 
 </body>
 </html>

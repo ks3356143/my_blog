@@ -71,7 +71,8 @@ class ArticleView(View):
             res['self'], res['msg'] = clean_form(form)
             res['code'] = 401
             return JsonResponse(res)
-
+        form.cleaned_data['source'] = '陈俊亦个人博客'
+        form.cleaned_data['auther'] = '陈俊亦'
         #表单通过-->**表示解构
         article_obj = Articles.objects.create(**form.cleaned_data)
         #标签三种状态：1、全是数字 2、数字加自己写 3、什么都没有 4、如果自己标签有数字呢？

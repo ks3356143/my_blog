@@ -16,6 +16,7 @@ urlpatterns = [
     path('login/',views.login),
     path('sign/',views.sign),
     re_path(r'^article/(?P<nid>\d+)',views.article),
+    re_path(r'^backend/edit_article/(?P<nid>\d+)',views.edit_article), #后台编辑文章
 
     re_path(r'^api/', include('api.urls')), #全部分发到api的app中
     #用户上传文件路由配置

@@ -35,12 +35,16 @@
                 <span>作者:<i>{{ article.auther }}</i></span>
                 <span>来源:<i>{{ article.source }}</i></span>
             </p>
+
             <div>
+            {% if article.tag.all %}
                 <i class="fa fa-tags" aria-hidden="true"></i>
                 {% for tag in article.tag.all %}
                     <i>{{ tag.title }}</i>
                 {% endfor %}
+            {% endif %}
             </div>
+
 
         </div>
         <div class="article_content" id="text-editor">
