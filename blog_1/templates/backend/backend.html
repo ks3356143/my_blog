@@ -165,21 +165,7 @@
             //侧边栏文章抽屉数据
             add_article_title: "",
             //选择文章分类数据
-            category_value: 2,
-            category_options: [
-                {
-                    value: 0,
-                    label: "前端",
-                },
-                {
-                    value: 1,
-                    label: "后端",
-                },
-                {
-                    value: 2,
-                    label: "项目相关",
-                },
-            ],
+            category_value: '',
             //选择标签
             tag_value: [],
             //是否上推荐
@@ -199,18 +185,27 @@
         },
         created() {
             let box = document.getElementById('edit_info')
+            
             this.add_article_title = box.getAttribute('data_title')
             this.abstract = box.getAttribute("data_abstract")
 
             let category_id = box.getAttribute("data_category")
             if(category_id !=="None"){
-                this.category_value = Number(category_id)
+                //this.category_value = Number(category_id)
+                this.category_value = category_id
             }
 
             this.tag_value = eval(box.getAttribute('data_tags'))
-
+           
             this.img_value = box.getAttribute('data_cover_id')
             this.tupian_now = box.getAttribute('data_cover_url')
+            
+            let recommend = box.getAttribute('data_recommend')
+            if(recommend=='True'){
+                this.recommend = true
+            }else{
+                this.recommend = false
+            }
 
 
             let password = box.getAttribute("data_pwd")

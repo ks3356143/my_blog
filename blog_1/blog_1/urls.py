@@ -8,7 +8,6 @@ from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # re_path(r'media/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
     path('', views.index),
     path('news/', views.news),
     path('app01/utils/font/', views.get_code),

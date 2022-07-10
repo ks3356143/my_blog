@@ -39,12 +39,12 @@
                                 v-model="category_value"
                                 class="category"
                                 placeholder="请选择文章分类">
-                            <el-option
-                                    v-for="item in category_options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
+                                {% for category in category_list %}
+                                <el-option
+                                    label="{{ category.1 }}"
+                                    value="{{ category.0 }}">
+                                </el-option>
+                            {% endfor %}
                         </el-select>
                         <el-select
                                 v-model="tag_value"

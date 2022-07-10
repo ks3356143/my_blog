@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from app01.utils.random_code import random_code
@@ -54,6 +55,8 @@ def backend(request):
 def add_article(request):
     tag_list = Tags.objects.all()
     cover_list = Cover.objects.all()
+    
+    category_list = Articles.category_choice
     return render(request,'backend/add_article.html',locals())
 
 #后台修改头像
@@ -70,7 +73,7 @@ def edit_article(request,nid):
     article_obj = Articles.objects.get(nid=nid)
     tag_list = Tags.objects.all()
     cover_list = Cover.objects.all()
-
     tags = [str(tag.nid) for tag in article_obj.tag.all()]
+    category_list = Articles.category_choice
 
     return render(request,'backend/edit_article.html',locals())

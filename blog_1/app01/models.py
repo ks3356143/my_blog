@@ -113,9 +113,9 @@ class Articles(models.Model):
     digg_count = models.IntegerField(verbose_name='文章点赞量', default=0)
     collects_count = models.IntegerField(verbose_name='文章收藏数', default=0)
     category_choice = (
-        (0, '收藏'),
-        (1, '后端'),
-        (2, '项目相关')
+        (1, '前端'),
+        (2, '后端'),
+        (3, '项目相关')
     )
     category = models.IntegerField(verbose_name='文章分类', choices=category_choice, null=True, blank=True)
     tag = models.ManyToManyField(

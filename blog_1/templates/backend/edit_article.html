@@ -7,6 +7,7 @@
                data_tags = "{{ tags }}"
                data_cover_id = "{{ article_obj.cover.nid }}"
                data_cover_url = "{{ article_obj.cover.url.url }}"
+               data_recommend = "{{ article_obj.recommend }}"
                data_abstract="{{ article_obj.abstract }}" data_title="{{ article_obj.title }}" class="actions" @click="add_drawer = true" type="warning">
         编辑文章信息
     </el-button>
@@ -39,12 +40,12 @@
                             v-model="category_value"
                             class="category"
                             placeholder="请选择文章分类">
+                    {% for category in category_list %}
                         <el-option
-                                v-for="item in category_options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
+                            label="{{ category.1 }}"
+                            value="{{ category.0 }}">
                         </el-option>
+                    {% endfor %}
                     </el-select>
                     <el-select
                             v-model="tag_value"
