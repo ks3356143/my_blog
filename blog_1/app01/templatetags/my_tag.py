@@ -14,5 +14,8 @@ def banner(menu_name,article=None):
         #拿到文章封面
         cover = article.cover.url.url
         img_list = [cover]
-        pass
+        
+        title = article.title
+        abstract = article.abstract
+        return {'img_list': img_list,'title_banner':title,'abstract_banner':abstract,'article':article}
     return {'img_list': img_list}

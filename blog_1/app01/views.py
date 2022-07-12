@@ -1,3 +1,4 @@
+from threading import local
 from unicodedata import category
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
@@ -12,7 +13,10 @@ def login(request):
     return render(request, 'login.html')
 
 def index(request):
-    return render(request, 'index.html', {'request': request})
+    article_list = Articles.objects.filter(status=1).order_by('-create_date')
+    qianduan_list = article_list.filter(category = 1).order_by('-create_date')[0:6]
+    houduan_list = article_list.filter(category = 2).order_by('-create_date')[0:6]
+    return render(request, 'index.html', locals())
 
 def article(request,nid):
     #找到该nid的数据

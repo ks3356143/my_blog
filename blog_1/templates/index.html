@@ -73,152 +73,37 @@
                         </div>
                         <div class="body">
                             <ul v-show="now_category === 'qianduan'" class="qianduan">
+                                {% for qianduan in qianduan_list %}
                                 <li>
                                     <div class="left">
                                         <div>
-                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
+                                            <img src="{{ qianduan.cover.url.url }}" alt="">
                                         </div>
                                     </div>
                                     <div class="right">
-                                        <h2>永不投降</h2>
-                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
-                                        <span>2天前</span>
+                                        <h2><a href="/article/{{ qianduan.nid }}"/>{{ qianduan.title }}</a></h2>
+                                        <p>{{ qianduan.abstract }}</p>
+                                        <span>{{ qianduan.create_date|date:'Y-m-d' }}</span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>永不投降</h2>
-                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>永不投降</h2>
-                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>永不投降</h2>
-                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>永不投降</h2>
-                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article2.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>永不投降</h2>
-                                        <p>勇敢俊俊向前冲，永远不会投降，永远不会投降，永远不会投降</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
+                                {% endfor %}
+                                
                             </ul>
                             <ul v-show="now_category === 'houduan'" class="hou">
+                                {% for houduan in houduan_list %}
                                 <li>
                                     <div class="left">
                                         <div>
-                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
+                                            <img src="{{ houduan.cover.url.url }}" alt="">
                                         </div>
                                     </div>
                                     <div class="right">
-                                        <h2>后端显示</h2>
-                                        <p>后端的显示，在这里永远贯彻党的领导</p>
-                                        <span>2天前</span>
+                                        <h2><a href="/article/{{ houduan.nid }}">{{ houduan.title }}</a></h2>
+                                        <p>{{ houduan.abstract }}</p>
+                                        <span>{{ houduan.create_date|date:'Y-m-d' }}</span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>后端显示</h2>
-                                        <p>后端的显示，在这里永远贯彻党的领导</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>后端显示</h2>
-                                        <p>后端的显示，在这里永远贯彻党的领导</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>后端显示</h2>
-                                        <p>后端的显示，在这里永远贯彻党的领导</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>后端显示</h2>
-                                        <p>后端的显示，在这里永远贯彻党的领导</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article3.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2>后端显示</h2>
-                                        <p>后端的显示，在这里永远贯彻党的领导</p>
-                                        <span>2天前</span>
-                                    </div>
-                                </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -239,74 +124,39 @@
                         </div>
                         <div class="body">
                             <ul>
+                                {% for article in article_list %}
                                 <li>
                                     <div class="left">
                                         <div>
-                                            <img src="/static/my/img/all_article/article1.jpg" alt="">
+                                            <img src="{{ article.cover.url.url }}" alt="">
 
                                         </div>
                                     </div>
                                     <div class="right">
-                                        <h2><a href="#">文章基本使用</a></h2>
-                                        <p>准备工作 在服务器上，需要准备一些部署必备的工作
-                                            已安装的忽略 ```Python git mysql nginx python3 ```
-                                            在本机上的准备工作 导出第三方准备工作 在服务器上
-                                            准备工作 在服务器上准备工作 在服务器上准备工作 在服务器上</p>
+                                        <h2><a href="/article/{{ article.nid }}">{{ article.title }}</a></h2>
+                                        <p>{{ article.abstract }}</p>
                                         <div class="article_info">
                                             <span>
-                                                <i class="fa fa-clock-o"></i>2022-06-12
+                                                <i class="fa fa-clock-o"></i>{{article.create_date|date:'Y-m-d' }}
                                             </span>
                                             <span>
-                                                <i class="fa fa-thumbs-up"></i>23
+                                                <i class="fa fa-thumbs-up"></i>{{ article.digg_count }}
                                             </span>
                                             <span>
-                                                <i class="fa fa-eye"></i>5
+                                                <i class="fa fa-eye"></i>{{ article.look_count }}
                                             </span>
                                             <span>
-                                                <i class="fa fa-comments"></i>1
+                                                <i class="fa fa-comments"></i>{{ article.comment_count }}
                                             </span>
                                             <span>
-                                                <i class="fa fa-star-half-o"></i>1
+                                                <i class="fa fa-star-half-o"></i>{{ article.collects_count }}
                                             </span>
-                                            <a href="">查看详情</a>
+                                            <a href="/article/{{ article.nid }}" target="_blank">查看详情</a>
                                         </div>
 
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="left">
-                                        <div>
-                                            <img src="/static/my/img/all_article/article1.jpg" alt="">
-
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h2><a href="#">文章基本使用</a></h2>
-                                        <p>准备工作 在服务器上，需要准备一些部署必备的工作
-                                            已安装的忽略 ```Python git mysql nginx python3 ```
-                                            在本机上的准备工作 导出第三方准备工作 在服务器上
-                                            准备工作 在服务器上准备工作 在服务器上准备工作 在服务器上</p>
-                                        <div class="article_info">
-                                            <span>
-                                                <i class="fa fa-clock-o"></i>2022-06-12
-                                            </span>
-                                            <span>
-                                                <i class="fa fa-thumbs-up"></i>23
-                                            </span>
-                                            <span>
-                                                <i class="fa fa-eye"></i>5
-                                            </span>
-                                            <span>
-                                                <i class="fa fa-comments"></i>1
-                                            </span>
-                                            <span>
-                                                <i class="fa fa-star-half-o"></i>1
-                                            </span>
-                                            <a href="">查看详情</a>
-                                        </div>
-
-                                    </div>
-                                </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
