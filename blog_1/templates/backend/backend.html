@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>后台界面</title>
+    <!-- 引入ElementUI样式 -->
+    <link rel="stylesheet" href="/static/vue/lib-master/theme-chalk/index.css" />
+    <link rel="stylesheet" href="/static/my/css/reset.css" />
+    {% block css %}
+
+    {% endblock %}
+    <link rel="stylesheet" href="/static/my/css/backend/backend.css" />
+    <!-- 引入Element组件库 -->
+    <script src="/static/axios/axios.js"></script>
+    <script src="/static/vue/vue.js"></script>
+    <script src="/static/vue/lib-master/index.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <aside>
+        <div class="logo">
+          <img src="/static/my/img/logo/logo.jpg" alt="" />
+        </div>
+        <ul>
+          <li>
+            <a href="/">首页</a>
+          </li>
+          <li>
+            <a href="/backend/">个人中心</a>
+          </li>
+          <li>
+            <a href="/backend/edit_avatar/">修改头像</a>
+          </li>
+          <li>
+            <a href="/backend/reset_password/">修改密码</a>
+          </li>
+          {% if request.user.is_superuser %}
+            <li>
+              <a href="/backend/add_article/">添加文章</a>
+            </li>
+          {% endif %}
+          <li>
+            <a href="/logout/">退出登录</a>
+          </li>
+        </ul>
+      </aside>
+      <main>
+        {% csrf_token %}
+        {% block main %}
+          <div class="user_info">
+            <div class="left">
+              <img src="/static/my/img/logo/logo.jpg" alt="" />
+            </div>
+            <div class="right">
+              <div class="item">
+                <span><b>用户名：</b>陈俊亦</span>
+              </div>
+              <div class="item">
+                <span><b>注册时间：</b>2022-06-30</span>
+              </div>
+              <div class="item">
+                <span><b>上次登录时间：</b>2022-06-30</span>
+              </div>
+              <div class="item">
+                <span><b>用户积分：</b>2015</span>
+              </div>
+              <div class="item">
+                <span><b>邮箱地址：</b>314298729@qq.com</span>
+              </div>
+              <div class="item">
+                <span><b>手机号：</b>18782947123</span>
+              </div>
+            </div>
+          </div>
+          <div class="action">
+            <div class="item">
+              <el-button type="primary">完善信息</el-button>
+            </div>
+            <div class="item">
+              <el-button type="success">修改头像</el-button>
+            </div>
+            <div class="item">
+              <el-button type="warning">修改密码</el-button>
+            </div>
+            <div class="item">
+              <el-button type="danger">注销退出</el-button>
+            </div>
+          </div>
+          {% block content %}
+            <div class="collection_article_all">
+              <p>我收藏的文章</p>
+              <div class="article_list">
+                <div class="item">
+                  <div class="left">
+                    <img src="/static/my/img/logo/the1.jpg" alt="" />
+                  </div>
+                  <div class="right">
+                    <h4>路由分发</h4>
+                    <p>此文章针对python的django项目，使用uwsgi进行部署,此文章针对python的django项目，使用uwsgi进行部署</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="left">
+                    <img src="/static/my/img/logo/the1.jpg" alt="" />
+                  </div>
+                  <div class="right">
+                    <h4>路由分发</h4>
+                    <p>此文章针对python的django项目，使用uwsgi进行部署</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="left">
+                    <img src="/static/my/img/logo/the1.jpg" alt="" />
+                  </div>
+                  <div class="right">
+                    <h4>路由分发</h4>
+                    <p>此文章针对python的django项目，使用uwsgi进行部署</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="left">
+                    <img src="/static/my/img/logo/the1.jpg" alt="" />
+                  </div>
+                  <div class="right">
+                    <h4>路由分发</h4>
+                    <p>此文章针对python的django项目，使用uwsgi进行部署</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endblock %}
+        {% endblock %}
+      </main>
+    </div>
+
+    {% block js %}
+
+    {% endblock %}
+    <script>
+      //请求中间件
+      axios.interceptors.request.use((request) => {
+        if (request.method !== 'get') {
+          let csrftoken = document.querySelector("input[name='csrfmiddlewaretoken']").value
+          request.headers['X-CSRFToken'] = csrftoken
+        }
+        return request
+      })
+      //axios响应中间件
+      axios.interceptors.response.use((response) => {
+        return response.data
+      })
+      
+      const vue = new Vue({
+        el: '#app',
+        data: {
+          //是否展开添加文章的侧边栏
+          add_drawer: false,
+          add_article_activeNames: ['1'],
+          //侧边栏文章抽屉数据
+          add_article_title: '',
+          //选择文章分类数据
+          category_value: '',
+          //选择标签
+          tag_value: [],
+          //是否上推荐
+          recommend: true,
+          //是否加密
+          pwdactive: false,
+          //加密面数据绑定
+          pwdinput: '',
+          //文章封面选择数据绑定
+          img_value: '',
+          tupian_now: '/media/article_img/311.jpg',
+          //文章简介
+          abstract: ''
+      
+        },
+        created() {
+          let path = location.pathname
+          let index = path.indexOf('add_article')
+          console.log(index)
+          if(index === -1){
+            let box = document.getElementById('edit_info')
+            this.img_value = box.getAttribute('data_cover_id')
+            this.add_article_title = box.getAttribute('data_title')
+            this.abstract = box.getAttribute('data_abstract')
+        
+            let category_id = box.getAttribute('data_category')
+            if (category_id !== 'None') {
+              //this.category_value = Number(category_id)
+              this.category_value = category_id
+            }
+        
+            this.tag_value = eval(box.getAttribute('data_tags'))
+            this.tupian_now = box.getAttribute('data_cover_url')
+        
+            let recommend = box.getAttribute('data_recommend')
+            if (recommend == 'True') {
+              this.recommend = true
+            } else {
+              this.recommend = false
+            }
+        
+            let password = box.getAttribute('data_pwd')
+            if (password !== 'None') {
+              this.pwdinput = password
+              this.pwdactive = true
+            }
+          }
+
+          
+        },
+        methods: {
+          add_handleClose(done) {
+            done()
+          },
+          //添加文章和编辑文章
+          add_edit_article() {
+            let data = {
+              title: this.add_article_title,
+              cover_id: this.img_value,
+              pwd: this.pwdinput,
+              recommend: this.recommend,
+              tags: this.tag_value,
+              category: this.category_value,
+              abstract: this.abstract,
+              content: editor.querySelector('.editormd-markdown-textarea').value
+            }
+            return data
+          },
+          //添加文章和编辑文章的回调函数
+          add_edit_callback(res) {
+            if (res.code !== 200) {
+              this.$message.error(res.msg)
+              return
+            }
+            this.$message.success(res.msg)
+            setTimeout(() => {
+              data = res.data
+              location.href = `/article/${data}/`
+            }, 200)
+          },
+          //添加文章的函数
+          add_article() {
+            let data = this.add_edit_article()
+            axios({
+              method: 'post',
+              url: '/api/article/',
+              data: data
+            }).then((res) => {
+              this.add_edit_callback(res)
+            })
+          },
+          //当选择器改变时候，更新图片展示
+          select_cover(value) {
+            //vue获取ref属性中的el-select属性值
+            setTimeout(() => {
+              let img_path = this.$refs.operatePath.selectedLabel
+              this.tupian_now = img_path
+            }, 100)
+          },
+      
+          edit_article(nid) {
+            let data = this.add_edit_article()
+            axios({
+              method: 'put',
+              url: `/api/article/${nid}`,
+              data: data
+            }).then((res) => {
+              this.add_edit_callback(res)
+            })
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

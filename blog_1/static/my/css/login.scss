@@ -1,0 +1,160 @@
+body {
+  width: 100%;
+  height: 100vh;
+
+  #app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  }
+}
+
+main {
+  width: 600px;
+  min-height: 700px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
+
+  .top {
+    padding: 40px 20px 20px 20px;
+
+    .title {
+      display: flex;
+      justify-content: center;
+      color: #808595;
+      a{
+        color: #808595;
+      }
+      a.active{
+          color: #ff9800;
+        }
+    }
+
+    .login_form {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+
+      .code{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        img{
+          height: 44px;
+          cursor: pointer;
+          border-radius: 5px;
+          border: 1px solid #ff9800;
+          object-fit: contain;
+          transition: all 0.3s;
+          &:hover{
+            transform: scale(1.1);
+          }
+        }
+        >input{
+          width: 55%;
+        }
+      }
+
+      input {
+        margin-bottom: 20px;
+        border: 1px solid #f0eeee;
+        outline: none;
+        height: 40px;
+        border-radius: 5px;
+        padding-left: 15px;
+        transition: all 0.3s;
+
+        &:focus {
+          border: 1px solid #ff9800;
+        }
+      }
+
+      input.sign_input{
+        margin-bottom: 10px;
+      }
+
+      button {
+        border: none;
+        border-radius: 5px;
+        height: 40px;
+        background-color: #ff9800;
+        color: white;
+        cursor: pointer;
+        transition: all 0.4s;
+        &:hover{
+          background-color: #62ff00;
+        }
+      }
+    }
+
+    .other_login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 200px;
+        height: 1px;
+        position: absolute;
+        background-color: #808595;
+        top:10px;
+        left: 0;
+      }
+
+      &::after {
+        content: "";
+        display: block;
+        width: 200px;
+        height: 1px;
+        position: absolute;
+        background-color: #808595;
+        top:10px;
+        right: 0;
+      }
+
+      >div{
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+          width: 40px;
+          margin-right:10px;
+          cursor: pointer;
+          &:last-child{
+            margin-right: 0;
+          }
+        }
+
+      }
+
+      > p {
+        color: #808595;
+        font-size: 14px;
+
+      }
+    }
+  }
+
+  .bottom {
+    img {
+      height: 180px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}

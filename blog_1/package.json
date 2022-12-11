@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "sass": "^1.56.1",
+    "sass-loader": "^13.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "editor.md": "^1.5.0",
+    "element-ui": "^2.15.12",
+    "qs": "^6.10.5"
+  }
+}

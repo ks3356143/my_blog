@@ -1,0 +1,17 @@
+<header>
+<div class="title">
+    {% if article %}
+        <h1>{{ title_banner }}</h1>
+        <p>{{ abstract_banner }}</p>
+    {% else %}
+        <h1>{{ 陈俊亦的个人博客 }}</h1>
+        <p>{{ 这里有很多有用的文章 }}</p>
+    {% endif %}
+    
+</div>
+    {% for img in img_list %}
+        <div class="dynamic_shuff">
+            <img src="{{ img }}" alt="">
+        </div>
+    {% endfor %}
+</header>

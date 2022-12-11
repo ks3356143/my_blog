@@ -1,0 +1,40 @@
+.pager{
+  list-style: none; //去掉原生list属性
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  >li{
+    display: inline-flex; //行内块形式
+    min-width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    margin-right:10px;
+    &:last-child{
+      margin-right: 0;
+    }
+    a{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      &:hover {
+        color: white;
+      }
+    }
+    &:hover{
+        background-color: #ff9800;
+      }
+  }
+  >li.active{
+    background-color: #ff9800;
+    a{
+      color: white;
+    }
+  }
+}

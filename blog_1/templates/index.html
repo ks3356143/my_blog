@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load my_tag %}
+<head>
+    <meta charset="UTF-8">
+    <title>叫哥的个人博客</title>
+    <!-- 引入favicon.ico -->
+    <link rel="shortcut icon" href="{% static 'my/img/favicon/favicon.ico' %}"/>
+    <!-- 引入ElementUI样式 -->
+    <link rel="stylesheet" href="/static/vue/lib-master/theme-chalk/index.css">
+    <link rel="stylesheet" href="/static/my/css/reset.css">
+    <link rel="stylesheet" href="/static/my/css/base.css">
+    {% block css %}
+        <link rel="stylesheet" href="/static/my/css/index.css">
+    {% endblock %}
+
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="/static/vue/vue.js"></script>
+    <!-- 引入Jquery -->
+    <script src="/static/JQuery/JQuery.js"></script>
+    <!-- 引入Element组件库 -->
+    <script src="/static/vue/lib-master/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <link rel="stylesheet" :href="'/static/my/css/theme/'+theme+'.css'">
+    <nav class="nav_bg">
+        <div class="left">
+            <a href="/">首页</a>
+            <a href="/news">新闻</a>
+            <a href="#">心情</a>
+            <a href="#">回忆录</a>
+            <a href="#">关于</a>
+            <a href="#">网站导航</a>
+        </div>
+        <div class="right">
+            <a href="#" @click="setTheme('dark')" v-if="pan_theme">黑色主题</a>
+            <a href="#" @click="setTheme('light')" v-else>白色主题</a>
+
+            {% if request.user.username %}
+                <el-dropdown>
+                  <span class="el-dropdown-link">
+                    {{ request.user.username }}<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item><a href="/backend">个人中心</a></el-dropdown-item>
+                        <el-dropdown-item><a href="/backend/edit_avatar">修改头像</a></el-dropdown-item>
+                        <el-dropdown-item><a href="/backend/add_article">发布文章</a></el-dropdown-item>
+                        <el-dropdown-item><a href="/admin">后台管理</a></el-dropdown-item>
+                        <el-dropdown-item divided><a href="/logout">注销退出</a></el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            {% else %}
+                <a href="/login">登录</a>
+                <a href="/sign">注册</a>
+            {% endif %}
+
+
+        </div>
+    </nav>
+    {% block banner %}
+        {% banner 'index' %}
+    {% endblock %}
+    <main>
+        {% block  main %}
+            <div class="main">
+                <div class="left">
+                    <div class="boutique_article card">
+                        <div class="title">
+                            <h2>精选文章</h2>
+                            <div class="switch_article_category">
+                                <span :isca="now_category === 'qianduan'"
+                                      @click="switch_article_categor('qianduan')">前端</span>
+                                <span :isca="now_category === 'houduan'"
+                                      @click="switch_article_categor('houduan')">后端</span>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <ul v-show="now_category === 'qianduan'" class="qianduan">
+                                {% for qianduan in qianduan_list %}
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="{{ qianduan.cover.url.url }}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <h2><a href="/article/{{ qianduan.nid }}">{{ qianduan.title }}</a></h2>
+                                            <p>{{ qianduan.abstract }}</p>
+                                            <span>{{ qianduan.create_date|date:'Y-m-d' }}</span>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                            <ul v-show="now_category === 'houduan'" class="hou">
+                                {% for houduan in houduan_list %}
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="{{ houduan.cover.url.url }}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <h2><a href="/article/{{ houduan.nid }}">{{ houduan.title }}</a></h2>
+                                            <p>{{ houduan.abstract }}</p>
+                                            <span>{{ houduan.create_date|date:'Y-m-d' }}</span>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hotList card">
+                        <div class="title">
+                            <h2 id="pos">今日热搜</h2>
+                            <div>
+                                <a href="#">查看更多</a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            主要内容区域
+                        </div>
+                    </div>
+                    <div class="all_article card">
+                        <div class="title">
+                            <h2>博客文章</h2>
+                        </div>
+                        <div class="body">
+                            <ul>
+                                {% for article in article_list %}
+                                    <li>
+                                        <div class="left">
+                                            <div>
+                                                <img src="{{ article.cover.url.url }}" alt="">
+
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <h2><a href="/article/{{ article.nid }}">{{ article.title }}</a></h2>
+                                            <p>{{ article.abstract }}</p>
+                                            <div class="article_info">
+                                            <span>
+                                                <i class="fa fa-clock-o"></i>{{ article.create_date|date:'Y-m-d' }}
+                                            </span>
+                                                <span>
+                                                <i class="fa fa-thumbs-up"></i>{{ article.digg_count }}
+                                            </span>
+                                                <span>
+                                                <i class="fa fa-eye"></i>{{ article.look_count }}
+                                            </span>
+                                                <span>
+                                                <i class="fa fa-comments"></i>{{ article.comment_count }}
+                                            </span>
+                                                <span>
+                                                <i class="fa fa-star-half-o"></i>{{ article.collects_count }}
+                                            </span>
+                                                <a href="/article/{{ article.nid }}" target="_blank">查看详情</a>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <ul class="pager">
+                            {{ pager.page_html|safe }}
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="advert card">
+                        <div class="title">
+                            <h2>独家广告</h2>
+                            <div>
+                                <a href="#">申请</a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            主要内容区域
+                        </div>
+                    </div>
+                    <div class="tags card">
+                        <div class="title">
+                            <h2>标签云</h2>
+                        </div>
+                        <div class="body">
+                            <ul>
+                                <li>Python</li>
+                                <li>Java</li>
+                                <li>Vue2</li>
+                                <li>Vue3</li>
+                                <li>Vite</li>
+                                <li>Django</li>
+                                <li>Html</li>
+                                <li>css</li>
+                                <li>SpringBoot</li>
+                                <li>ORM</li>
+                                <li>C</li>
+                                <li>Qt</li>
+                                <li>PyQt</li>
+                                <li>ElementUI</li>
+                                <li>React</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="site_info card">
+                        <div class="title">
+                            <h2>站点信息</h2>
+                        </div>
+                        <div class="body">
+                            主要内容区域
+                        </div>
+                    </div>
+                    <div class="links card">
+                        <div class="title">
+                            <h2>友情链接</h2>
+                            <div>
+                                <a href="#">申请</a>
+                            </div>
+                        </div>
+                        <div class="body">
+                            主要内容区域
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </main>
+    <footer>
+        <div class="left">
+            <p class="thk">Thank For</p>
+            <p class="site_info">
+
+                <span><img src="/static/my/img/footer/tencent.png" alt="">腾讯云服务器</span>
+                <span><img src="/static/my/img/footer/tencent.png" alt="">腾讯云SSL证书</span>
+                <span><img src="/static/my/img/footer/qiniu.png" alt="">七牛云存储</span>
+
+            </p>
+            <p class="version">
+                <span>version</span>
+                <span>0.0.0.1</span>
+            </p>
+            <p>建站日期:2022年6月20日</p>
+            <p class="beian">
+                <a href=""><img src="/static/my/img/footer/badges.png" alt="">备案号链接</a>
+            </p>
+        </div>
+        <div class="right">
+            <div class="contact">
+                <div>
+                    <img class="svg" src="/static/my/img/footer/qq_no.svg" alt="">
+                    <img class="qq" src="/static/my/img/footer/qq_icon.svg" alt="">
+                </div>
+                <div>
+                    <img class="svg" src="/static/my/img/footer/wechat_no.svg" alt="">
+                    <img class="wechat" src="/static/my/img/footer/wechat_color.svg" alt="">
+                </div>
+                <div>
+                    <a href="" target="_blank">
+                        <img class="svg" src="/static/my/img/footer/bilibili.svg" alt="">
+                    </a>
+                </div>
+                <div>
+                    <a href="" target="_blank">
+                        <img class="svg" src="/static/my/img/footer/github.svg" alt="">
+                    </a>
+                </div>
+            </div>
+            <p>联系方式：31498729@qq.com</p>
+        </div>
+    </footer>
+</div>
+<script src="/static/axios/axios.js"></script>
+<script>
+    //axios请求中间件
+    axios.interceptors.request.use(request => {
+        if (request.method !== 'get') {
+            let csrftoken = document.querySelector("input[name='csrfmiddlewaretoken']").value
+            request.headers['X-CSRFToken'] = csrftoken
+        }
+        return request
+    })
+    //axios响应中间件
+    axios.interceptors.response.use(response => {
+        return response.data
+    })
+
+    const vue = new Vue({
+        el: "#app",
+        delimiters: ["[[", "]]"],
+        data: {
+            theme: "light", //默认主题
+            pan_theme: true,
+            now_category: 'qianduan',//当前精选文章位置
+            // 评论内容
+            comment_content: "",
+            sub_comment_content: "",
+            isShowSlider: false,
+            slider_list: [],
+            slide_text : '开启悬浮目录',
+        },
+        created() {
+            this.init_theme();
+            let path = location.pathname;
+            if (path.indexOf('article') !== -1){
+                this.init_slider();
+            }
+        },
+        mounted() {
+            setTimeout(() => {
+                this.get_sliderbar();
+            }, 200)
+        },
+        methods: {
+            //初始化主题
+            init_theme() {
+                let theme = localStorage.getItem('theme')
+                if (theme) {
+                    this.theme = theme
+                }
+            },
+            //设置主题
+            setTheme(th_name) {
+                this.theme = th_name
+                this.pan_theme = !this.pan_theme
+                //写入持久化存储
+                localStorage.setItem('theme', th_name)
+            },
+            //精选文章切换分类
+            switch_article_categor(category) {
+                this.now_category = category
+            },
+            //发布评论按钮
+            add_comment(nid) {
+                axios.post(`/api/article/comment/`, {content: this.comment_content, nid: nid}).then(res => {
+                    if (res.code) {
+                        if (res.self) {
+                            this.$refs[`comment_${res.self}`].focus();
+                        }
+                        this.$message.error(res.msg);
+                        return
+                    }
+                    this.$message.success(res.msg);
+                    setTimeout(() => {
+                        location.reload()
+                    }, 500)
+                })
+            },
+            //将被评论用户名写到placeholder
+            set_sub_placeholder(div, username, cid) {
+                $(div).find('textarea').attr('placeholder', `@${username}`)    //找到它下面的textarea标签
+                $(div).find('textarea').attr('cid', cid)
+            },
+            //展示子评论列表
+            show_sub_comment_list(e, username, cid) {
+                let div = $(e.target).parent().parent().next()
+                $(div).slideToggle()
+                //这个div是点回复的div
+                this.set_sub_placeholder(div, username, cid)
+            },
+            //子评论回复显示
+            sub_comment_set_placeholder(e, username, cid) {
+                let div = $(e.target).parents('.sub_comment_list')
+                this.set_sub_placeholder(div, username, cid)
+            },
+            //发布子评论
+            add_sub_comment(e, nid) { //区分恢复子评论还是根评论，将父评论id传过来
+                axios.post(`/api/article/comment/`, {
+                    content: this.sub_comment_content,
+                    cid: $(e.target).prev().attr('cid'),
+                    nid: nid,
+                }).then((res) => {
+                    if (res.code) {
+                        if (res.self) {
+                            this.$refs[`sub_comment_${res.self}`].focus();
+                        }
+                        this.$message.error(res.msg)
+                        return
+                    }
+                    this.$message.success(res.msg)
+                    setTimeout(() => {
+                        location.reload()
+                    }, 500)
+                })
+            },
+            //删除子评论
+            delete_sub_comment(nid) {
+                console.log('点击了删除按钮')
+                this.$confirm('此操作将永久删除该评论, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    axios.delete(`/api/article/comment/`, {data: {nid: nid}}).then(res => {
+                        if (res.code) {
+                            //如果有验证失败
+                            this.$message.error(res.msg)
+                            return
+                        }
+                        this.$message.success(res.msg)
+                        setTimeout(() => {
+                            location.reload()
+                        }, 1000)
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+
+            },
+            //删除根评论
+            delete_root_comment(nid) {
+                this.$confirm('此操作将永久删除该评论, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    axios.post('/api/article/rootcomment/', {nid: nid}).then((res) => {
+                        if (res.code) {
+                            this.$message.error(res.msg)
+                        }
+                        this.$message.success(res.msg)
+                        setTimeout(() => {
+                            location.reload()
+                        }, 1000)
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+
+            },
+            //评论点赞
+            comment_digg(e, nid) {
+                axios.post(`/api/comment/digg/${nid}/`).then(res => {
+                    if (res.code) {
+                        this.$message.error(res.msg)
+                    }
+                    this.$message.success(res.msg)
+                    e.target.innerText = `点赞（${res.data}）`
+                })
+            },
+            //文章点赞
+            article_digg(e, nid) {
+                let dom = e.target
+                axios.post(`/api/article/digg/${nid}/`).then(res => {
+                    if (res.code) {
+                        this.$message.error(res.msg)
+                    }
+                    $(dom).next().text(res.data)
+                    this.$message.success(res.msg)
+                })
+                dom.classList.add('show')
+                let timer = null
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                    dom.classList.remove('show')
+                }, 1000)
+            },
+            //文章收藏
+            article_collect(e, nid) {
+                let dom = e.target
+                axios.post(`/api/article/collect/${nid}/`).then(res => {
+                    console.log(res)
+                    if (res.code) {
+                        this.$message.error(res.msg)
+                        return
+                    }
+                    if (res.isCollect) {
+                        dom.classList.remove('show')
+                    } else {
+                        dom.classList.add('show')
+                    }
+                    $(dom).next().text(res.data)
+                    this.$message.success(res.msg)
+                })
+
+            },
+            //回到顶部
+            go_to_top() {
+                $('body').animate({
+                    scrollTop: 0,
+                }, 500)
+            },
+            //初始化localStorage
+            init_slider(){ //必须在文章详情页面
+                let flag = localStorage.getItem('isShowSlider')
+                if (flag){
+                    flag = eval(flag)
+                    if(flag){
+                        this.isShowSlider = true;
+                        this.$nextTick(()=>{
+                            this.sliderChange(true)
+                        })
+                    }
+                }
+            },
+            //切换悬浮目录
+            sliderChange(val) {
+                let dom = this.$refs.slider
+                localStorage.setItem('isShowSlider',val) //写的是字符串类型
+                if (val === true) {
+                    dom.classList.add('show');
+                    this.slide_text = '关闭悬浮目录';
+                } else {
+                    dom.classList.remove('show')
+                    this.slide_text = '显示悬浮目录';
+                }
+            },
+            //获取悬浮目录
+            get_sliderbar() { //在vue2的created函数去执行获取
+                let content = $('#text-editor') //使用Jquery获取所有H标签
+                let h_list = content.children('h1,h2,h3,h4')
+                let lis = []
+                Object.keys(h_list).forEach((index) => {
+                    //获取元素为h_list[index]
+                    let c = h_list[index].innerText
+                    let tag_name = h_list[index].tagName
+                    let tagId = h_list[index].id
+                    //构造个对象出来
+                    let ele = {
+                        tag_name,
+                        c,
+                        pos: '#' + tagId,
+                    }
+                    if (ele.tag_name !== undefined) {
+                        lis.push(ele)
+                    }
+                })
+                this.slider_list = lis
+                console.log(this.slider_list)
+            },
+            //点击悬浮目录p标签跳转
+            go_side_bar(selector, e) {
+                $('.slider_bar .body>p').css('color', '')
+                e.target.style.color = '#ff9800'
+                let box = $(selector)
+                let pos = box.offset()
+                pos.top = pos.top - 80
+                $('body').animate({
+                    scrollTop: pos.top
+                }, 500)
+            }
+        }
+    })
+    // 轮播图东西
+    let menu_img = document.querySelectorAll('.dynamic_shuff')
+    // 定时器函数interval
+    let index = 0
+    let menu_length = menu_img.length
+    // 每次创建页面销毁
+    let timer_interval = null
+    clearInterval(timer_interval)
+    menu_img[0].style.opacity = 1
+    timer_interval = setInterval(() => {
+        index++
+        if (index === menu_length) {
+            index = 0
+        }
+        for (let i of menu_img) {
+            i.style.opacity = 0
+        }
+        menu_img[index].style.opacity = 1
+    }, 5000)
+
+
+    // 动态导航条-监听滚动事件
+    let nav = document.querySelector('.nav_bg')
+    let path = location.pathname
+    let slider = document.querySelector('.slider_bar')
+    let top1 = 0;
+    let action_article = document.querySelector('.article_actions')
+    let top2 = 0;
+    if (path.indexOf('article') !== -1) {
+        top1 = $(slider).offset().top - 80
+        top2 = $(action_article).offset().top - 80
+    }
+
+
+    window.onscroll = function () {
+        let top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset;
+        // 到500就添加一个样式
+        console.log(top)
+        if (top >= 350) {
+            nav.classList.add('show')
+        } else {
+            nav.classList.remove("show")
+        }
+        if (path.indexOf('article') !== -1) {
+            if (top >= top1) {
+                slider.classList.add('fixed')
+            } else {
+                slider.classList.remove('fixed')
+            }
+            if (top >= 400){
+                action_article.classList.add('show_now')
+            } else {
+                action_article.classList.remove('show_now')
+            }
+        }
+
+    }
+</script>
+{% block js %}
+
+{% endblock %}
+
+</body>
+</html>
