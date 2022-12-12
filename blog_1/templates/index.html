@@ -33,6 +33,10 @@
             <a href="#">回忆录</a>
             <a href="#">关于</a>
             <a href="#">网站导航</a>
+            <div class="search">
+                <input type="text" class="search_box" placeholder="搜索你想要的文章...">
+                <button @click="search"><i class="fa fa-search"></i></button>
+            </div>
         </div>
         <div class="right">
             <a href="#" @click="setTheme('dark')" v-if="pan_theme">黑色主题</a>
@@ -300,12 +304,12 @@
             sub_comment_content: "",
             isShowSlider: false,
             slider_list: [],
-            slide_text : '开启悬浮目录',
+            slide_text: '开启悬浮目录',
         },
         created() {
             this.init_theme();
             let path = location.pathname;
-            if (path.indexOf('article') !== -1){
+            if (path.indexOf('article') !== -1) {
                 this.init_slider();
             }
         },
@@ -490,13 +494,13 @@
                 }, 500)
             },
             //初始化localStorage
-            init_slider(){ //必须在文章详情页面
+            init_slider() { //必须在文章详情页面
                 let flag = localStorage.getItem('isShowSlider')
-                if (flag){
+                if (flag) {
                     flag = eval(flag)
-                    if(flag){
+                    if (flag) {
                         this.isShowSlider = true;
-                        this.$nextTick(()=>{
+                        this.$nextTick(() => {
                             this.sliderChange(true)
                         })
                     }
@@ -505,7 +509,7 @@
             //切换悬浮目录
             sliderChange(val) {
                 let dom = this.$refs.slider
-                localStorage.setItem('isShowSlider',val) //写的是字符串类型
+                localStorage.setItem('isShowSlider', val) //写的是字符串类型
                 if (val === true) {
                     dom.classList.add('show');
                     this.slide_text = '关闭悬浮目录';
@@ -547,68 +551,78 @@
                 $('body').animate({
                     scrollTop: pos.top
                 }, 500)
+            },
+            //点击搜索
+            search(){
+                let box = document.querySelector('.search')
+                if (!box.classList.contains('show_search')){
+                    box.classList.add('show_search')
+                } else{
+                    box.classList.remove('show_search')
+                }
             }
         }
     })
-    // 轮播图东西
-    let menu_img = document.querySelectorAll('.dynamic_shuff')
-    // 定时器函数interval
-    let index = 0
-    let menu_length = menu_img.length
-    // 每次创建页面销毁
-    let timer_interval = null
-    clearInterval(timer_interval)
-    menu_img[0].style.opacity = 1
-    timer_interval = setInterval(() => {
-        index++
-        if (index === menu_length) {
-            index = 0
-        }
-        for (let i of menu_img) {
-            i.style.opacity = 0
-        }
-        menu_img[index].style.opacity = 1
-    }, 5000)
 
-
-    // 动态导航条-监听滚动事件
-    let nav = document.querySelector('.nav_bg')
-    let path = location.pathname
-    let slider = document.querySelector('.slider_bar')
-    let top1 = 0;
-    let action_article = document.querySelector('.article_actions')
-    let top2 = 0;
-    if (path.indexOf('article') !== -1) {
-        top1 = $(slider).offset().top - 80
-        top2 = $(action_article).offset().top - 80
-    }
-
-
-    window.onscroll = function () {
-        let top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset;
-        // 到500就添加一个样式
-        console.log(top)
-        if (top >= 350) {
-            nav.classList.add('show')
-        } else {
-            nav.classList.remove("show")
-        }
-        if (path.indexOf('article') !== -1) {
-            if (top >= top1) {
-                slider.classList.add('fixed')
-            } else {
-                slider.classList.remove('fixed')
-            }
-            if (top >= 400){
-                action_article.classList.add('show_now')
-            } else {
-                action_article.classList.remove('show_now')
-            }
-        }
-
-    }
 </script>
 {% block js %}
+    <script>
+        // 轮播图东西
+        let menu_img = document.querySelectorAll('.dynamic_shuff')
+        // 定时器函数interval
+        let index = 0
+        let menu_length = menu_img.length
+        // 每次创建页面销毁
+        let timer_interval = null
+        clearInterval(timer_interval)
+        menu_img[0].style.opacity = 1
+        timer_interval = setInterval(() => {
+            index++
+            if (index === menu_length) {
+                index = 0
+            }
+            for (let i of menu_img) {
+                i.style.opacity = 0
+            }
+            menu_img[index].style.opacity = 1
+        }, 5000)
+
+        // 动态导航条-监听滚动事件
+        let nav = document.querySelector('.nav_bg')
+        let path = location.pathname
+        let slider = document.querySelector('.slider_bar')
+        let top1 = 0;
+        let action_article = document.querySelector('.article_actions')
+        let top2 = 0;
+        if (path.indexOf('article') !== -1) {
+            top1 = $(slider).offset().top - 80
+            top2 = $(action_article).offset().top - 80
+        }
+        window.onscroll = function () {
+            let top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset;
+            // 到500就添加一个样式
+            if (top >= 350) {
+                nav.classList.add('show')
+            } else {
+                nav.classList.remove("show")
+            }
+            if (path.indexOf('article') !== -1) {
+                if (top >= top1) {
+                    slider.classList.add('fixed')
+                } else {
+                    slider.classList.remove('fixed')
+                }
+                if (top >= 400) {
+                    action_article.classList.add('show_now')
+                } else {
+                    action_article.classList.remove('show_now')
+                }
+            }
+
+        }
+    </script>
+{% endblock %}
+{% block article_js %}
 
 {% endblock %}
 

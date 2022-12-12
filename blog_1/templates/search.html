@@ -273,8 +273,20 @@
                 </div>
             </li>
         </ul>
-        <div class="pager">
-
-        </div>
+        <ul class="pager">
+            <li><a href="">上一页</a></li>
+            <li><a href="">1</a></li>
+            <li class="active"><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">下一页</a></li>
+        </ul>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        // 动态导航条-监听滚动事件
+        let nav = document.querySelector('.nav_bg')
+        nav.classList.add('show')
+    </script>
 {% endblock %}

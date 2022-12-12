@@ -9,9 +9,9 @@ a blog practice blog project~
 
 
 
-# 本次新增-搜索页面伪元素
+# 本次新增-搜索页面和index页面
 
-1.object-fit: cover; 对图片进行裁剪
+1.如何完成pagination的复用
 
-
+2.如果在index.html中将4个状态搜索框展示
 

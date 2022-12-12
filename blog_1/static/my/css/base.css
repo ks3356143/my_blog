@@ -211,4 +211,50 @@ footer .contact .svg:hover ~ .wechat {
   color: #333333;
 }
 
+nav .search {
+  display: inline-flex;
+}
+nav .search input {
+  width: 0;
+  height: 40px;
+  transition: all 0.3s;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+nav .search button {
+  color: white;
+  border: none;
+  transition: all 0.5s;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+nav.show .search button {
+  color: #333333;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+nav .show_search input {
+  width: 200px;
+  border-radius: 5px 0 0 5px;
+  padding-left: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+nav .show_search button {
+  width: 40px;
+  background-color: white;
+  border-radius: 0 5px 5px 0;
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+nav.show .show_search input {
+  border: 1px solid #e5e9ef;
+}
+nav.show .show_search button {
+  border: 1px solid #e5e9ef;
+}
+
 /*# sourceMappingURL=base.css.map */
