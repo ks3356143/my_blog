@@ -32,6 +32,7 @@
   border: none;
   background-color: #ff9800;
   color: white;
+  cursor: pointer;
 }
 .main .search_tiaojian {
   width: 100%;

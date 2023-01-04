@@ -10,19 +10,20 @@
 
 {% block main %}
     <div class="main">
-        <div class="search_box">
+        <form action="" class="search_box">
             <div>
                 陈俊亦博客 | 搜索
             </div>
             <div>
                 <label>
-                    <input type="text" placeholder="搜索你想要的内容..."/>
+                    <input name="key" type="text" placeholder="搜索你想要的内容..." class="search_key_input" data="{{ search_key }}"
+                           v-model="search_key"/>
                 </label>
             </div>
             <button>
                 <i class="fa fa-search">搜索</i>
             </button>
-        </div>
+        </form>
         <div class="search_tiaojian">
             <ul>
                 <li class="active"><a href="">综合排序</a></li>

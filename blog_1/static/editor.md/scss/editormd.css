@@ -368,13 +368,13 @@
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
   .editormd-container-mask,
-.editormd-dialog-mask-con {
+  .editormd-dialog-mask-con {
     background-image: url(../images/loading@2x.gif);
   }
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-pixel-ratio: 3) {
   .editormd-container-mask,
-.editormd-dialog-mask-con {
+  .editormd-dialog-mask-con {
     background-image: url(../images/loading@3x.gif);
   }
 }

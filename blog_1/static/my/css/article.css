@@ -357,4 +357,19 @@ main {
   visibility: visible;
 }
 
+pre {
+  position: relative;
+}
+pre:hover .code-copy {
+  opacity: 1;
+}
+pre .code-copy {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  opacity: 0;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=article.css.map */

@@ -98,6 +98,7 @@ def edit_article(request,nid):
     return render(request,'backend/edit_article.html',locals())
 
 #搜索页面
-def search(requst):
-
-    return render(requst,'search.html',locals())
+def search(request):
+    search_key = request.GET.get('key')
+    print(search_key)
+    return render(request,'search.html',locals())

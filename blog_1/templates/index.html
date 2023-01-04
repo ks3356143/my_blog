@@ -33,8 +33,9 @@
             <a href="#">回忆录</a>
             <a href="#">关于</a>
             <a href="#">网站导航</a>
+            <a href="/search">搜索</a>
             <div class="search">
-                <input type="text" class="search_box" placeholder="搜索你想要的文章...">
+                <input type="text" class="search_box" v-model="search_key" placeholder="搜索你想要的文章...">
                 <button @click="search"><i class="fa fa-search"></i></button>
             </div>
         </div>
@@ -305,17 +306,25 @@
             isShowSlider: false,
             slider_list: [],
             slide_text: '开启悬浮目录',
+            search_key: "",
         },
         created() {
             this.init_theme();
             let path = location.pathname;
             if (path.indexOf('article') !== -1) {
                 this.init_slider();
+
+            }
+            if (path.indexOf('search') !== -1) {
+                this.init_search_key();
             }
         },
         mounted() {
             setTimeout(() => {
                 this.get_sliderbar();
+                this.$nextTick(() => {
+                            this.code_copy();
+                        })
             }, 200)
         },
         methods: {
@@ -553,13 +562,49 @@
                 }, 500)
             },
             //点击搜索
-            search(){
+            search() {
                 let box = document.querySelector('.search')
-                if (!box.classList.contains('show_search')){
+                if (!box.classList.contains('show_search')) {
                     box.classList.add('show_search')
-                } else{
-                    box.classList.remove('show_search')
+                    return
                 }
+                if (this.search_key === "") {
+                    box.classList.remove('show_search')
+                } else {
+                    // 重新打开标签页
+                    window.open('/search/?key=' + this.search_key, name = "_blank")
+                }
+
+
+            },
+            //预填写input搜索条件
+            init_search_key(){
+                let dom = document.querySelector('.search_key_input')
+                let key = dom.getAttribute('data')
+                this.search_key = key
+            },
+            //一键复制代码，获取页面pre
+            code_copy(){
+                $('pre').each(function (){
+                    let copy = $('<i title=""copy class="el-icon-document-copy code-copy"></i>')
+                    $(this).append(copy)
+                })
+                //嵌套里面用JQuery监听鼠标点击事件
+                $('pre i.code-copy').click(e=>{
+                    let text_list = $(e.target).prev().find('code')
+                    let text = ""
+                    text_list.each(function (){
+                        text += $(this).text() + '\n'
+                    })
+                    let element = $('<textarea>' + text + '</textarea>')
+                    $('body').append(element)
+                    element[0].select()
+                    document.execCommand('copy')
+                    element.remove()
+
+                    this.$message.success('复制成功！')
+                })
+
             }
         }
     })

@@ -420,3 +420,20 @@ main{
   opacity: 1;
   visibility: visible;
 }
+
+pre{
+  position: relative;
+  &:hover{
+    .code-copy{
+      opacity: 1;
+    }
+  }
+  .code-copy{
+    position: absolute;
+    right:10px;
+    top:10px;
+    opacity: 0;
+    transition: all 0.3s;
+    cursor:pointer;
+  }
+}
