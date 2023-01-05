@@ -16,7 +16,8 @@
             </div>
             <div>
                 <label>
-                    <input name="key" type="text" placeholder="搜索你想要的内容..." class="search_key_input" data="{{ search_key }}"
+                    <input name="key" type="text" placeholder="搜索你想要的内容..." class="search_key_input"
+                           data="{{ search_key }}"
                            v-model="search_key"/>
                 </label>
             </div>
@@ -53,233 +54,31 @@
             </ul>
         </div>
         <ul class="search_content">
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
+            {% for article in article_list %}
+                <li>
+                    <a href="/article/{{ article.nid }}/" target="_blank" class="img">
+                        <img src="{{ article.cover.url.url }}" alt="">
+                    </a>
+                    <div class="info">
+                        <div class="title">
+                            <a target="_blank" href="/article/{{ article.nid }}">{{ article.title }}</a>
+                        </div>
+                        <div class="icon">
                         <span>
                             <i class="fa fa-lock"></i>
-                            44445
+                            {{ article.look_count }}
                         </span>
-                        <span>
+                            <span>
                             <i class="fa fa-chevron-right"></i>
-                            2022-12-11
+                            {{ article.change_date | date:'Y-m-d' }}
                         </span>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="" class="img">
-                    <img src="/static/my/img/jieshaotu/jieshao.avif" alt="">
-                </a>
-                <div class="info">
-                    <div class="title">
-                        <a href="">【陈俊亦博客】自己创建自己的博客</a>
-                    </div>
-                    <div class="icon">
-                        <span>
-                            <i class="fa fa-lock"></i>
-                            44445
-                        </span>
-                        <span>
-                            <i class="fa fa-chevron-right"></i>
-                            2022-12-11
-                        </span>
-                    </div>
-                </div>
-            </li>
+                </li>
+            {% endfor %}
         </ul>
         <ul class="pager">
-            <li><a href="">上一页</a></li>
-            <li><a href="">1</a></li>
-            <li class="active"><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">下一页</a></li>
+            {{ pager.page_html | safe }}
         </ul>
     </div>
 {% endblock %}
