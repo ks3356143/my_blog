@@ -27,7 +27,7 @@ class Search:
 
 if __name__ == '__main__':
     order = Search(
-        order='',
+        order='look_count',
         order_list=[
             ('-create_date', "最新发布"),
             ('look_count', "最多浏览"),
