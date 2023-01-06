@@ -45,7 +45,7 @@ class AddArticleForm(forms.Form):
         # 获取正文
         content = self.cleaned_data.get('content')
         if content:
-            abstract = PyQuery(markdown(content)).text()[:30]
+            abstract = PyQuery(markdown(content)).text()[:90]
             return abstract
 
     # cover_id的局部钩子

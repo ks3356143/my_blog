@@ -99,8 +99,15 @@ def edit_article(request,nid):
 
 #搜索页面
 def search(request):
-    search_key = request.GET.get('key')
-    article_list = Articles.objects.filter(title__contains=search_key)
+    search_key = request.GET.get('key','')
+    order = request.GET.get('order','')
+    if order:
+        try:
+            article_list = Articles.objects.filter(title__contains=search_key).order_by(order)
+        except Exception as e:
+            article_list = Articles.objects.filter(title__contains=search_key)
+    else:
+        article_list = Articles.objects.filter(title__contains=search_key)
 
     #分页器
     query_params = request.GET.copy()  # dict
@@ -115,5 +122,7 @@ def search(request):
         pager_page_count=9
     )
     article_list = article_list[pager.start:pager.end]
+    #文章搜索条件
+
 
     return render(request,'search.html',locals())
