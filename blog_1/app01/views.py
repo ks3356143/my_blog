@@ -6,6 +6,7 @@ from django.contrib import auth
 from app01.models import Articles,Tags,Cover
 from app01.utils.sub_comment import sub_comment_list
 from app01.utils.pagination import Pagination
+from django.db.models import F
 
 
 # 登录页面
@@ -34,6 +35,9 @@ def index(request):
 def article(request,nid):
     #找到该nid的数据
     article_query = Articles.objects.filter(nid=nid)
+
+    #浏览后浏览量加一
+    article_query.update(look_count = F('look_count')+1)
     if not article_query:
         return redirect('/')
     article = article_query.first()
@@ -101,16 +105,28 @@ def edit_article(request,nid):
 def search(request):
     search_key = request.GET.get('key','')
     order = request.GET.get('order','')
+    #添加字数搜索
+    word = request.GET.getlist('word')
+    print(word)
+    #添加标签搜索
+    tag = request.GET.get('tag','') #不存在返回None
+
+    query_params = request.GET.copy()  # dict
+
+    article_list = Articles.objects.filter(title__contains=search_key)
+    #字数搜索
+
+    if len(word) == 2:
+        article_list = article_list.filter(word__range=word)
+    if tag:
+        article_list = article_list.filter(tag__title=tag)
     if order:
         try:
-            article_list = Articles.objects.filter(title__contains=search_key).order_by(order)
+            article_list = article_list.order_by(order)
         except Exception as e:
-            article_list = Articles.objects.filter(title__contains=search_key)
-    else:
-        article_list = Articles.objects.filter(title__contains=search_key)
+            pass
 
     #分页器
-    query_params = request.GET.copy()  # dict
     if not 'page' in query_params.keys():
         query_params['page'] = 1
     pager = Pagination(
@@ -123,6 +139,4 @@ def search(request):
     )
     article_list = article_list[pager.start:pager.end]
     #文章搜索条件
-
-
     return render(request,'search.html',locals())

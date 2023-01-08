@@ -65,6 +65,9 @@ nav .right .el-dropdown {
 nav .right .el-dropdown span {
   cursor: pointer;
 }
+nav a.active {
+  color: #ff9800;
+}
 nav a {
   color: white;
   margin-right: 20px;

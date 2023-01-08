@@ -26,7 +26,7 @@
 <div id="app">
     <link rel="stylesheet" :href="'/static/my/css/theme/'+theme+'.css'">
     <nav class="nav_bg">
-        <div class="left">
+        <div class="left" ref="dynamic_menu">
             <a href="/">首页</a>
             <a href="/news">新闻</a>
             <a href="#">心情</a>
@@ -326,6 +326,16 @@
                             this.code_copy();
                         })
             }, 200)
+            let dynamic_menu = this.$refs.dynamic_menu //获取到父标签
+            let a_list = dynamic_menu.querySelectorAll('a')
+            let path = location.pathname
+            for(const a of a_list){
+                let a_href = a.getAttribute('href')
+                if (a_href === path || a_href + '/' === path){
+                    a.classList.add('active')
+                }
+            }
+
         },
         methods: {
             //初始化主题

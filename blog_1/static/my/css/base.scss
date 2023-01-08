@@ -74,7 +74,9 @@ nav {
     }
   }
 
-
+  a.active{
+    color: #ff9800;
+  }
   a {
     color: white;
     margin-right: 20px;
@@ -83,6 +85,7 @@ nav {
       margin-right: 0;
     }
   }
+
 }
 
 nav.show{

@@ -1,8 +1,9 @@
 import math
 
+
 class Pagination:
-    def __init__(self,current_page,all_count,base_url,
-                 query_params,per_page,pager_page_count,position='pos'):#position为锚点
+    def __init__(self, current_page, all_count, base_url,
+                 query_params, per_page, pager_page_count, position='pos'):  # position为锚点
         # 当前页码、数据库中的总条数、原始URL、保留原搜索条件、一页展示多少、最多显示多少个页码
         self.all_count = all_count
         self.base_url = base_url
@@ -10,7 +11,7 @@ class Pagination:
         self.per_page = per_page
         self.position = position
         # 计算一共有多少个页
-        self.current_count = math.ceil(all_count/per_page) #ceil函数是除有余就进位
+        self.current_count = math.ceil(all_count / per_page)  # ceil函数是除有余就进位
 
         # 1.只能是满足条件的数字
         try:
@@ -67,6 +68,10 @@ class Pagination:
             self.query_params['page'] = self.current_page + 1
             page_list.append(f'<li><a href="{self.base_url}?{self.query_encode}#{self.position}">下一页</a></li>')
 
+        if len(page_list) == 1:
+            # 不显示分页器
+            page_list = []
+
         return ''.join(page_list)
 
     # 起始和结束值
@@ -74,7 +79,7 @@ class Pagination:
     def query_encode(self):
         return self.query_params.urlencode()
 
-    @property #有点像计算属性
+    @property  # 有点像计算属性
     def start(self):
         return (self.current_page - 1) * self.per_page
 

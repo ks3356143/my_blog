@@ -1,5 +1,5 @@
 {% extends 'index.html' %}
-
+{% load my_tag my_filter %}
 {% block banner %}
 
 {% endblock %}
@@ -27,34 +27,16 @@
         </form>
         <div class="search_tiaojian">
             <ul>
-                <li class="active"><a href="">综合排序</a></li>
-                <li><a href="?order=-create_date">最新发布</a></li>
-                <li><a href="?order=look_count">最新发布</a></li>
-                <li><a href="?order=digg_count">最多点赞</a></li>
-                <li><a href="?order=collects_count">最多收藏</a></li>
-                <li><a href="?order=comment_count">最多评论</a></li>
+                {% generate_order_html request 'order' %}
             </ul>
             <ul>
-                <li class="active"><a href="">全部字数</a></li>
-                <li><a href="">100字左右</a></li>
-                <li><a href="">500字左右</a></li>
-                <li><a href="">2000字左右</a></li>
-                <li><a href="">3000字以上</a></li>
+                {% generate_order_html request 'word' %}
             </ul>
             <ul>
-                <li class="active"><a href="">全部标签</a></li>
-                <li><a href="">python</a></li>
-                <li><a href="">Django</a></li>
-                <li><a href="">Vue</a></li>
-                <li><a href="">Javascript</a></li>
-                <li><a href="">JQuery</a></li>
-                <li><a href="">Java</a></li>
-                <li><a href="">Flask</a></li>
-                <li><a href="">SprinBoot</a></li>
-                <li><a href="">组件</a></li>
+                {% generate_order_html request 'tag' %}
             </ul>
         </div>
-        <ul class="search_content">
+        <ul class={{ article_list|is_article_list }}>
             {% for article in article_list %}
                 <li>
                     <a href="/article/{{ article.nid }}/" target="_blank" class="img">
@@ -66,7 +48,7 @@
                         </div>
                         <div class="icon">
                         <span>
-                            <i class="fa fa-lock"></i>
+                            <i class="fa fa-eye"></i>
                             {{ article.look_count }}
                         </span>
                             <span>
