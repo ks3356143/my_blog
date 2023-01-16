@@ -590,8 +590,7 @@
             //预填写input搜索条件
             init_search_key(){
                 let dom = document.querySelector('.search_key_input')
-                let key = dom.getAttribute('data')
-                this.search_key = key
+                this.search_key = dom.getAttribute('data')
             },
             //一键复制代码，获取页面pre
             code_copy(){

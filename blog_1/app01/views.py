@@ -140,3 +140,6 @@ def search(request):
     article_list = article_list[pager.start:pager.end]
     #文章搜索条件
     return render(request,'search.html',locals())
+
+def admin_home(request):
+    return render(request,'admin_home.html')
